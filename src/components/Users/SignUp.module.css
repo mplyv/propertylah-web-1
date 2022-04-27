@@ -1,0 +1,14 @@
+.signup {
+  margin: 20px auto;
+}
+
+.signup h1 {
+  margin-bottom: 30px;
+}
+
+.signup form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 400px;
+  gap: 20px;
+}

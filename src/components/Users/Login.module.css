@@ -1,0 +1,14 @@
+.login {
+  margin: 20px auto;
+}
+
+.login h1 {
+  margin-bottom: 30px;
+}
+
+.login form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 400px;
+  gap: 20px;
+}

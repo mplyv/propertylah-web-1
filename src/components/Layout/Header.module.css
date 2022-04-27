@@ -1,0 +1,37 @@
+.header {
+  border-top: 2px solid var(--pri-color);
+  /* background-color: var(--pri-light); */
+  padding: 10px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  /* fixing header */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 999;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+}
+
+.logo {
+  height: 30px;
+}
+
+/* Nav */
+.main-nav {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.main-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  align-items: center;
+  text-transform: uppercase;
+  font-weight: 700;
+}
