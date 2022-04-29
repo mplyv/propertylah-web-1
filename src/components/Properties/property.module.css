@@ -58,9 +58,18 @@
     color: white;
 }
 .sidebar{
-    width: 340px;
+    width: 300px;
     margin-left: 20px;
     border: solid 1px black;
+}
+.sidebarSpecificProperty{
+    padding: 10px;
+    width: 300px;
+    margin-top: 20px;
+}
+.sidebarSpecificProperty > p{
+    height: 24px;
+    line-height: 24px;
 }
 .icon{
     object-fit: contain;
@@ -103,9 +112,11 @@
     padding: 10px;
 }
 .filterSearchBarButton{
+    font-size: 13.33px;
+    cursor: pointer;
     margin: auto;
     height: 28px;
-    line-height: 24px;
+    line-height: 28px;
     padding: 0px 15px;
     border: solid 1px black;
     border-radius: 10px;
@@ -113,4 +124,148 @@
 .searchBar{
     border-radius: 10px;
     border: solid 1px black;
+}
+.clearButton{
+    border: solid 1px black;
+    margin:auto;
+    cursor: pointer;
+    border-radius: 10px;
+    line-height: 24px;
+    padding: 0px 10px;
+    background-color:rgba(218, 218, 218, 0.836);
+    color: blue;
+}
+.clearButton:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    background-color:rgba(218, 218, 218, 0.836);
+    color: blue;
+}
+.horizontalContainerPopup{
+    justify-content: space-evenly;
+    display:flex;
+    flex-direction: row;
+}
+.horizontalContainerPopupFixed{
+    border-top: solid 1px black;
+    background-color: lightgrey;
+    justify-content: space-evenly;
+    padding: 20px 0px 10px;
+    display:flex;
+    flex-direction: row;
+    position: sticky;
+    bottom: 0px;
+}
+.popupCards{
+    border-bottom: solid 1px grey;
+    padding: 10px;
+}
+.selected{
+    cursor: pointer;
+    margin: auto;
+    height: 28px;
+    line-height: 24px;
+    padding: 0px 15px;
+    border: solid 1px black;
+    border-radius: 10px;
+    background-color: Orange;
+}
+.applyFilter{
+    margin:auto;
+    display:flex;
+    justify-content: center;
+    width: 25%;
+    color: white;
+    cursor: pointer;
+    height: 28px;
+    line-height: 28px;
+    padding: 0px 15px;
+    border: solid 1px black;
+    border-radius: 10px;
+    background-color: blue;
+}
+.input,
+.input:focus{
+    font-size: 16px;
+    background-color: white;
+    margin: 0px 10px;
+    border: solid 1px black;
+    border-radius: 5px;
+    margin: 10px;
+}
+.inputLabel{
+    font-size: 16px;
+    line-height: 61px;
+}
+.detailsContainer{
+    width: 100%;
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.detailsCard{
+    width: 45%;
+    margin: 10px 20px 10px 0px;
+    padding: 10px;
+    display:flex;
+    flex-direction: column;
+    border-bottom: dotted 1px grey;
+}
+.detailsCard > p{
+    margin: 3px;
+}
+.detailsHead{
+    color:rgb(150, 150, 150);
+    font-size: 14px;
+}
+.specificPropertyContainer{
+    width: 600px;
+}
+.price{
+    font-size: 36px;
+    margin: 20px;
+    margin-left: 10px;
+}
+.horizontalContainerSpecificProperty{
+    font-size: 20px;
+    margin: 20px;
+    margin-left: 10px;
+    height: 23px;
+    display:flex;
+    flex-direction: row;
+}
+.submitContactButton{
+    margin: auto;
+    background-color: rgb(204, 17, 17);
+    border-radius: 10px;
+}
+.contactForm{
+    margin-top: 20px;
+    display:flex;
+    flex-direction: column;
+}
+.whatsappButtonSpecificProperty{
+    margin:auto;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    font-size: 13px;
+    align-self: center;
+    width: 150px;
+    border: solid 1px grey;
+    border-radius: 10px;
+    color: black;
+    background-color: white;
+}
+.whatsappButtonSpecificProperty:hover{
+    background-color: #128c7e;
+    color: white;
+}
+.stickySidebar{
+    background-color: lightgrey;
+    height: 450px;
+    position: sticky;
+    top: 100px;
 }
