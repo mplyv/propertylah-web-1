@@ -6,7 +6,7 @@ const PropertyHome = ()=>{
         <div>
             <Link to='/properties/rent'>Rent</Link>
             <br/>
-            <Link to='/properties/sale'>Sale</Link>
+            <Link to='/properties/sale'>Buy</Link>
         </div>
     )
 }

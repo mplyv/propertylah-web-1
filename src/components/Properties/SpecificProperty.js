@@ -3,12 +3,14 @@ import { useParams } from "react-router-dom"
 import styles from './property.module.css'
 import { useEffect, useState } from "react"
 import API from './API.js'
+import PopupComponent from "./components/PopupComponent"
 
 const SpecificProperty = ()=>{
     const [propertyData, setPropertyData] = useState('');
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
     const [email, setEmail] = useState('');
+    const [refresh, forceRefresh] = useState(true);
 
     let params = useParams();
     let tempDate = new Date(propertyData.createdAt).toDateString();
@@ -22,7 +24,7 @@ const SpecificProperty = ()=>{
             setPropertyData(data);
         }
         fetchData();
-    },[params.id])
+    },[params.id, refresh])
 
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -33,7 +35,6 @@ const SpecificProperty = ()=>{
         ${email}`)
     }
     const handleChange = (e)=>{
-
         if(e.target.placeholder === 'Name'){
             setName(e.target.value);
         } else if (e.target.placeholder === 'Mobile Number'){
@@ -49,7 +50,13 @@ const SpecificProperty = ()=>{
             <div className={styles.mainContainer}>
                 <div className={styles.cardContainer}>
                     <div className={styles.specificPropertyContainer}>
-                        <p style={{fontSize:'26px', padding: '10px', fontWeight:'bold'}}>{propertyData.propertyName}</p>
+                        <div style={{display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
+                            <p style={{fontSize:'26px', padding: '10px', fontWeight:'bold'}}>{propertyData.propertyName}</p>
+                            <div style={{margin:'auto 0px'}}>
+                                {parseInt(params.sellerId) === propertyData.sellerId? <PopupComponent name='Edit' propertyData={propertyData} refresh={refresh} forceRefresh={forceRefresh}/>: null}
+                                {parseInt(params.sellerId) === propertyData.sellerId? <PopupComponent name='Delete' propertyData={propertyData}/>: null}
+                            </div>
+                        </div>
                         <img className={styles.image} src='/assets/property-images/Sky-Vue-Ang-Mo-Kio-Bishan-Thomson-Singapore-1.jpg' alt='image1' />
                         <div>
                             {propertyData.saleType==='Rent'? <p className={styles.price}>S$ {propertyData.price.toLocaleString()} /mo</p>: <p className={styles.price}>S$ {propertyData.price.toLocaleString()}</p>}
@@ -61,7 +68,7 @@ const SpecificProperty = ()=>{
                             </div >
                             <div className={styles.propertyCard}>
                                 <p className={styles.fontLargeBold}>{propertyData.propertyName}</p>
-                                <p className={styles.fontSmall}>{propertyData.address}</p>
+                                <p className={styles.fontSmall}>{propertyData.address}, {propertyData.postcode}, Singapore</p>
                                 <p>Distance to MRT</p>
                             </div>
                         </div>
@@ -94,6 +101,10 @@ const SpecificProperty = ()=>{
                             <div className={styles.detailsCard}>
                                 <p className={styles.detailsHead}>Listing ID</p>
                                 <p>{propertyData.id}</p>
+                            </div>
+                            <div className={styles.detailsCard}>
+                                <p className={styles.detailsHead}>Agent ID</p>
+                                <p>{propertyData.sellerId}</p>
                             </div>
                             <div className={styles.detailsCard}>
                                 <p className={styles.detailsHead}>Availability</p>
