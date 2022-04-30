@@ -1,37 +1,22 @@
-import { useState, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Route, Routes, useParams, useNavigate } from "react-router-dom";
 import "../../index.css";
-import { getQuestions, getCategoryQuestions } from "./API"
+import { getQuestions } from "./API"
 
 import Container from "../UI/Container";
 import Card from "../UI/Card";
-import HeroSection from "./HeroSection";
-import CategorySection from "./CategorySection";
-import CategoryQuestions from "./CategoryQuestions";
 
-const QnA = () => {
-  const [ totalQuestions, setTotalQuestions ] = useState([]);
-  const [ questions, setQuestions ] = useState([]);
-  const [ loading, setLoading ] = useState(false);
+const CategoryQuestions = () => {
+  const { category } = useParams();
+  
+  const navigate = useNavigate();
 
   return (
-    <>
-    <HeroSection 
-      totalQuestions={totalQuestions} 
-      setTotalQuestions={setTotalQuestions} 
-      loading={loading}
-      setLoading={setLoading}
-    />
-    <CategorySection 
-      questions={questions} 
-      setQuestions={setQuestions}       
-      totalQuestions={totalQuestions} 
-    />
     <Container>
-      <Card><h1>Hello</h1></Card>
+      <Card><h1>Hello { category }</h1></Card>
       <button>Hello</button>
       <div>
-        <h1>Q & A</h1>
+        <h1>{category}</h1>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
           pellentesque nec purus id imperdiet. Nunc eu varius velit. Lorem ipsum
@@ -72,11 +57,8 @@ const QnA = () => {
         </p>
       </div>
     </Container>
-    <Routes>
-    <Route path=":category/*" element={<CategoryQuestions />} />
-    </Routes>
-    </>
-  );
-};
+  )
+  
+}
 
-export default QnA;
+export default CategoryQuestions;
