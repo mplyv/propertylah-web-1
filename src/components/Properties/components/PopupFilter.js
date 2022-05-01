@@ -30,6 +30,9 @@ const PopupFilter = (props) => {
     const [noOfBedrooms, setNoOfBedrooms] = useState('All');
     const [propertyType, setPropertyType] = useState('All');
     const [tenure, setTenure] = useState("All");
+    //* popup controllers
+    const [open, setOpen] = useState(false);
+    const closeModal = () => setOpen(false);
     
     //* onChange and selector handlers
     const handlePropertyType = (event)=>{
@@ -88,6 +91,7 @@ const PopupFilter = (props) => {
         props.setNoOfBedrooms(noOfBedrooms);
         props.setPropertyType(propertyType);
         props.setTenure(tenure);
+        setOpen(false)
     }
 
     const clearAllFilters = ()=>{
@@ -102,51 +106,54 @@ const PopupFilter = (props) => {
     }
 
     //* Styling for popup modal
-    const contentStyle = { background: 'white', width:'600px', height:'700px', overflowY: "auto", padding:'0px 0px'};
+    const contentStyle = { background: 'white', width:'600px', height:'60vh', overflowY: "auto", padding:'0px 0px'};
 
     return(
-        <Popup trigger={<div className={styles.filterSearchBarButton}>Filter</div>} position="right center" modal {...{ contentStyle }}>
-            <div>
-                <form>
-                    <div className={styles.popupCards}>
-                        <p>Property Type</p>
-                        <DropdownButtons handleChange={handlePropertyType} options={propertyTypeOptions} type='text' variable={propertyType}/>
-                    </div>
-                    <div className={styles.popupCards}>
-                        <p>Price</p>
-                        <Input min={minPrice} max={maxPrice} onChange={handleInputChange} options={priceOptions}/>
-                    </div>
-                    <div className={styles.popupCards}>
-                        <p>Bedrooms</p>
-                        <DropdownButtons handleChange={handleNoOfBeds} options={bedroomOptions} type='num' variable={noOfBedrooms}/>
-                    </div>
-                    <div className={styles.popupCards}>
-                        <p>Floorsize</p>
-                        <Input min={minFloorsize} max={maxFloorsize} onChange={handleInputChange} options={floorsizeOptions}/>
-                    </div>
-                    <div className={styles.popupCards}>
-                        <p>Bathrooms</p>
-                        <DropdownButtons handleChange={handleNoOfBaths} options={bathOptions} type='num' variable={noOfBathrooms}/>
-                    </div>
-                    <div className={styles.popupCards}>
-                        <p>Tenure</p>
-                        <DropdownButtons handleChange={handleTenure} options={tenureOptions} type='text' variable={tenure}/>
-                    </div>
-                    <div className={styles.popupCards}>
-                        <p>PSF</p>
-                        <Input min={minPSF} max={maxPSF} onChange={handleInputChange} options={PSFOptions}/>
-                    </div>
-                    <div className={styles.popupCards}>
-                        <p>Build Year</p>
-                        <Input min={minYear} max={maxYear} onChange={handleInputChange} options={TOPYearOptions}/>
-                    </div>
-                    <div className={styles.horizontalContainerPopupFixed}>
-                        <div className={styles.clearButton} onClick={clearAllFilters}>Reset All Filters</div>
-                        <div className={styles.applyFilter} onClick={handleSubmit}>Apply Filter</div>
-                    </div>
-                </form>
-            </div>
-        </Popup>
+        <>
+            <div className={styles.filterSearchBarButton} onClick={()=>{setOpen(o => !o)}}>Filter</div>
+            <Popup open={open} onClose={closeModal} modal {...{ contentStyle }}>
+                <div>
+                    <form>
+                        <div className={styles.popupCards}>
+                            <p>Property Type</p>
+                            <DropdownButtons handleChange={handlePropertyType} options={propertyTypeOptions} type='text' variable={propertyType}/>
+                        </div>
+                        <div className={styles.popupCards}>
+                            <p>Price</p>
+                            <Input min={minPrice} max={maxPrice} onChange={handleInputChange} options={priceOptions}/>
+                        </div>
+                        <div className={styles.popupCards}>
+                            <p>Bedrooms</p>
+                            <DropdownButtons handleChange={handleNoOfBeds} options={bedroomOptions} type='num' variable={noOfBedrooms}/>
+                        </div>
+                        <div className={styles.popupCards}>
+                            <p>Floorsize</p>
+                            <Input min={minFloorsize} max={maxFloorsize} onChange={handleInputChange} options={floorsizeOptions}/>
+                        </div>
+                        <div className={styles.popupCards}>
+                            <p>Bathrooms</p>
+                            <DropdownButtons handleChange={handleNoOfBaths} options={bathOptions} type='num' variable={noOfBathrooms}/>
+                        </div>
+                        <div className={styles.popupCards}>
+                            <p>Tenure</p>
+                            <DropdownButtons handleChange={handleTenure} options={tenureOptions} type='text' variable={tenure}/>
+                        </div>
+                        <div className={styles.popupCards}>
+                            <p>PSF</p>
+                            <Input min={minPSF} max={maxPSF} onChange={handleInputChange} options={PSFOptions}/>
+                        </div>
+                        <div className={styles.popupCards}>
+                            <p>Build Year</p>
+                            <Input min={minYear} max={maxYear} onChange={handleInputChange} options={TOPYearOptions}/>
+                        </div>
+                        <div className={styles.horizontalContainerPopupFixed}>
+                            <div className={styles.clearButton} onClick={clearAllFilters}>Reset All Filters</div>
+                            <div className={styles.applyFilter} onClick={handleSubmit}>Apply Filter</div>
+                        </div>
+                    </form>
+                </div>
+            </Popup>
+        </>
     )
 };
 

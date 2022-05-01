@@ -54,9 +54,9 @@ const FilterBar = (props)=>{
                 setPropertyType = {props.setPropertyType}
                 setTenure = {props.setTenure}
             />
-            <DropdownList onChange={handleChangePropertyType} value={props.propertyType} options={['Property Type: All','HDB','Condominium','Apartment']} />
+            <DropdownList onChange={handleChangePropertyType} value={props.propertyType} options={['Property Type: All','HDB','Condominium','Apartment']} className={`filterSearchBarButton`}/>
             <DropdownInputs clear={clearPrice} onChange={handlePriceChange} min={props.minPrice} max={props.maxPrice} options={['All','Min Price','Max Price']}/>
-            <DropdownList onChange={handleChangeBedrooms} value={props.noOfBedrooms} options={['Bedrooms: All','1','2','3','4','5+']}/>
+            <DropdownList onChange={handleChangeBedrooms} value={props.noOfBedrooms} options={['Bedrooms: All','1','2','3','4','5+']} className={`filterSearchBarButton`}/>
             <button className={styles.clearButton} onClick={clearFilterBar}>Clear All Filters</button>
         </div>
     )

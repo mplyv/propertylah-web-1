@@ -13,9 +13,10 @@ const Properties = ()=>{
     <Routes>
       <Route path='/' element={<PropertyHome />}/>
         <Route path='/rent' element={<PropertyList path='Rent'/>}/>
-          <Route path='/rent/:id' element={<SpecificProperty />}/>
+        <Route path='/rent/:id' element={<SpecificProperty />}/>
         <Route path='/sale' element={<PropertyList path='Sale'/>}/>
         <Route path='/agent/:sellerId' element={<PropertyList path='All'/>}/>
+        <Route path='/agent/:sellerId/:id' element={<SpecificProperty />}/>
     </Routes>
   )
 }
