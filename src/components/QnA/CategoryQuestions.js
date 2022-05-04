@@ -68,7 +68,9 @@ const CategoryQuestions = (props) => {
   // console.log(timeSince(new Date(Date.now()-aDay*2)));
   return (
     <Container>
-      { loading ? <div>Loading . . .</div> : (
+      <Card><h1>Hello { categoryId }</h1></Card>
+
+      { loading ? <div className={classes.loading}>Loading . . .</div> : (
         categoryQuestions.map((qn) => {
           return (
           <Link to={`/qna/${categoryId}/${qn.id}`} key={qn.id}>
@@ -82,7 +84,8 @@ const CategoryQuestions = (props) => {
               </div>
             </div>
             <div className={classes.meta}>
-              <p>asked {timeSince(new Date(qn.createdAt))} ago on {new Date(qn.createdAt).toDateString()}</p>
+              <p>Updated {timeSince(new Date(qn.updatedAt))} ago •&nbsp;</p>
+              <p>Asked {timeSince(new Date(qn.createdAt))} ago on {new Date(qn.createdAt).toDateString()}</p>
             </div>
             <div className={classes.question}>
               {qn.question}
@@ -90,12 +93,12 @@ const CategoryQuestions = (props) => {
           </div>
           </Link>
           
-        )}).slice().sort((a, b) => b.createdAt > a.createdAt ? 1 : -1)
+        )}).slice().sort((a, b) => b.updatedAt > a.updatedAt ? 1 : -1)
       )}
       
       <Card><h1>Hello { categoryId }</h1></Card>
       <button>Hello</button>
-      <div>
+      {/* <div>
         <h1>{categoryId}</h1>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
@@ -135,7 +138,7 @@ const CategoryQuestions = (props) => {
           vulputate felis, consectetur pharetra metus. Proin id metus porttitor,
           venenatis arcu ac, venenatis leo. In hac habitasse platea dictumst.
         </p>
-      </div>
+      </div> */}
     </Container>
     
   )
