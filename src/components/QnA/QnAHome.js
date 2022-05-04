@@ -7,6 +7,7 @@ import Card from "../UI/Card";
 import HeroSection from "./HeroSection";
 import CategorySection from "./CategorySection";
 import CategoryQuestions from "./CategoryQuestions";
+import SearchBar from "./SearchBar/SearchBar";
 
 const QnAHome = () => {
   const [ totalQuestions, setTotalQuestions ] = useState([]);
@@ -24,12 +25,12 @@ const QnAHome = () => {
       setLoading={setLoading}
       showModal={showModal}
       setShowModal={setShowModal}
-    />
+      />
     <CategorySection 
       questions={questions} 
       setQuestions={setQuestions}       
       totalQuestions={totalQuestions} 
-    />
+      />
     {/* <Container>
       <Card><h1>Hello</h1></Card>
       <button>Hello</button>
