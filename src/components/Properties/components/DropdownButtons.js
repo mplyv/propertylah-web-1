@@ -7,7 +7,9 @@ const DropdownButtons = (props)=>{
             <div id={props.options[0]} className={props.variable.includes('All')? styles.selected : styles.filterSearchBarButton} onClick={props.handleChange}>All</div>
             {props.options.map((option)=>{
                 return(
-                    option.includes('All')? null:<div key={option} id={option} className={option.includes(props.variable)? styles.selected:styles.filterSearchBarButton} onClick={props.handleChange}>{option.slice(0,1)}</div>
+                    option.includes('All')? null : option.includes('+')? 
+                    <div key={option} id={option} className={option.includes(props.variable)? styles.selected:styles.filterSearchBarButton} onClick={props.handleChange}>{option.slice(0,2)}</div> :
+                    <div key={option} id={option} className={option.includes(props.variable)? styles.selected:styles.filterSearchBarButton} onClick={props.handleChange}>{option.slice(0,1)}</div>
                 )
             }
             )}

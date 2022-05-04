@@ -7,6 +7,7 @@ import styles from './property.module.css'
 
 import {useEffect, useState } from 'react'
 import { useParams } from "react-router-dom";
+import PopupComponent from "./components/PopupComponent";
 
 //todo featured agents
 
@@ -48,11 +49,15 @@ const PropertyList = (props)=>{
       }
       if(noOfBedrooms === 'All'){
         // return all
+      } else if(noOfBedrooms === '5'){
+        filtered = filtered.filter(propertyObj=>propertyObj.noOfBedrooms >= parseInt(noOfBedrooms))
       } else {
         filtered = filtered.filter(propertyObj=>propertyObj.noOfBedrooms === parseInt(noOfBedrooms))
       }
       if(noOfBathrooms === 'All'){
         // return all
+      } else if(noOfBathrooms === '5'){
+        filtered = filtered.filter(propertyObj=>propertyObj.noOfBathrooms >= parseInt(noOfBathrooms))
       } else {
         filtered = filtered.filter(propertyObj=>propertyObj.noOfBaths === parseInt(noOfBathrooms))
       }
@@ -112,11 +117,17 @@ const PropertyList = (props)=>{
             <p>{data.length} Properties found in Singapore</p>
             {data.map(propertyData =>{
               return(
-                <div className={styles.propertyContainer} key = {propertyData.id} onClick={()=>navigate(`/properties/rent/${propertyData.id}`)}> 
+                <div className={styles.propertyContainer} key = {propertyData.id} onClick={()=>{
+                    if(parseInt(params.sellerId) === propertyData.sellerId){
+                      navigate(`/properties/agent/${params.sellerId}/${propertyData.id}`)
+                    } else {
+                      navigate(`/properties/rent/${propertyData.id}`)
+                    }
+                  }}> 
                   <img className={styles.image} src='/assets/property-images/Sky-Vue-Ang-Mo-Kio-Bishan-Thomson-Singapore-1.jpg' alt='image1' />
                   <div className={styles.propertyCard}>
                     <p className={styles.fontLargeBold}>{propertyData.propertyName}</p>
-                    <p className={styles.fontSmall}>{propertyData.address}</p>
+                    <p className={styles.fontSmall}>{propertyData.address}, {propertyData.postcode}, Singapore</p>
                     <div className={styles.horizontalContainer}>
                       {propertyData.saleType==='Rent'? <p>S$ {propertyData.price.toLocaleString()} /mo</p>: <p>S$ {propertyData.price.toLocaleString()}</p>}
                       <p className={styles.availability}>• Available from</p>
@@ -140,9 +151,19 @@ const PropertyList = (props)=>{
               )
             })}
           </div>
+          {params.sellerId? 
+          <div className={styles.stickySidebar} style={{backgroundColor: 'white'}}>
+            <div className={styles.sidebarSpecificProperty}>
+              <PopupComponent name='Add' propertyData={''}/>
+            </div> 
+          </div> 
+          : 
           <div className={styles.sidebar}>
-            <p>Featured Agents</p>
-          </div>
+            <p>Link to Q&A</p>
+            <p>FAQ</p>
+          </div> 
+          }
+          
         </div>
       </div>
     </Container>
