@@ -65,6 +65,7 @@ const PopupComponent = (props) => {
             })
             if (result.status === 200){
                 props.forceRefresh(!props.refresh)
+                window.alert('Property Updated')
             }
         };
         async function addProperty (){
