@@ -119,10 +119,19 @@ const SpecificProperty = ()=>{
                     {propertyData.User === undefined? null: 
                     <div className={styles.stickySidebar}>
                         <div className={styles.sidebarSpecificProperty}>
-                            <p>{propertyData.User.firstName} {propertyData.User.lastName}</p>
-                            <p>ERA REALTY NETWORK PTE LTD </p>
-                            <p>CEA: R027564Z / L3002382K</p>
-                            <div className={styles.whatsappButtonSpecificProperty}><img className={styles.icon} src='/assets/icons/phone-icon.png' alt='phoneIcon'/>Whatsapp</div>
+                            <div>
+                                {/* <img ></img> //todo add image for agent avatar */}
+                                <>
+                                    <p>{propertyData.User.firstName} {propertyData.User.lastName}</p>
+                                    <p>ERA REALTY NETWORK PTE LTD </p>
+                                    <p>CEA: R027564Z / L3002382K</p>
+                                </>
+                            </div>
+                            <div className={styles.whatsappButtonSpecificProperty} onClick={(e)=>{
+                                e.stopPropagation();
+                                window.alert('Link to Whatsapp Web')
+                                }}><img className={styles.icon} src='/assets/icons/phone-icon.png' alt='phoneIcon'/>
+                            Whatsapp</div>
                         </div>
                         <form className={styles.contactForm} onSubmit={handleSubmit}>
                             <input required placeholder="Name" className={styles.input} value={name} onChange={handleChange}></input>

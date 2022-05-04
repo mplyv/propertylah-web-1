@@ -8,8 +8,9 @@ import styles from './property.module.css'
 import {useEffect, useState } from 'react'
 import { useParams } from "react-router-dom";
 import PopupComponent from "./components/PopupComponent";
+import ImageViewer from "./components/ImageViewer";
 
-//todo featured agents
+//todo add qna modal
 
 const PropertyList = (props)=>{
   let navigate = useNavigate();
@@ -29,6 +30,7 @@ const PropertyList = (props)=>{
   const params = useParams();
   const sellerId = params.sellerId; 
 
+  //! props coming from links. 3 possibilities (All, Sale, Rent). render changes depending on which path taken.
   //* Initial populate + rerender every filter
   useEffect(() => {
     async function fetchData(){
@@ -114,17 +116,25 @@ const PropertyList = (props)=>{
       <div className={styles.mainContainer}>
         <div className={styles.cardContainer}>
           <div>
-            <p>{data.length} Properties found in Singapore</p>
+            <p>{data.length} Properties {props.path === 'All'? null: `for ${props.path}`} found in Singapore</p>
             {data.map(propertyData =>{
               return(
                 <div className={styles.propertyContainer} key = {propertyData.id} onClick={()=>{
-                    if(parseInt(params.sellerId) === propertyData.sellerId){
-                      navigate(`/properties/agent/${params.sellerId}/${propertyData.id}`)
-                    } else {
-                      navigate(`/properties/rent/${propertyData.id}`)
-                    }
-                  }}> 
-                  <img className={styles.image} src='/assets/property-images/Sky-Vue-Ang-Mo-Kio-Bishan-Thomson-Singapore-1.jpg' alt='image1' />
+                  if(parseInt(params.sellerId) === propertyData.sellerId){
+                    navigate(`/properties/agent/${params.sellerId}/${propertyData.id}`)
+                  } else {
+                    navigate(`/properties/rent/${propertyData.id}`)
+                  }
+                }}> 
+                  <div style={{height:'480px'}}>
+                    {/* //todo this should come from API */}
+                    <ImageViewer source={[
+                    '/assets/property-images/Sky-Vue-Ang-Mo-Kio-Bishan-Thomson-Singapore-1.jpg',
+                    '/assets/property-images/Sky-Vue-Ang-Mo-Kio-Bishan-Thomson-Singapore-2.jpg',
+                    '/assets/property-images/Sky-Vue-Ang-Mo-Kio-Bishan-Thomson-Singapore-3.jpg',
+                    '/assets/property-images/Sky-Vue-Ang-Mo-Kio-Bishan-Thomson-Singapore-4.jpg'
+                    ]}/>
+                  </div>
                   <div className={styles.propertyCard}>
                     <p className={styles.fontLargeBold}>{propertyData.propertyName}</p>
                     <p className={styles.fontSmall}>{propertyData.address}, {propertyData.postcode}, Singapore</p>
@@ -145,7 +155,13 @@ const PropertyList = (props)=>{
                       <p>Listed by {propertyData.User.firstName} {propertyData.User.lastName}</p>
                       <p>'Great Property!!'</p>
                     </div>
-                    <div className={styles.whatsappButton}><img className={styles.icon} src='/assets/icons/phone-icon.png' alt='phoneIcon'/>Whatsapp</div>
+                    {/* //* stopPropagation used to prevent parent parent div onClick from being triggered */}
+                    <div className={styles.whatsappButton} onClick={(e)=>{
+                        e.stopPropagation();
+                        window.alert('Link to Whatsapp Web')
+                        }}>
+                      <img className={styles.icon} src='/assets/icons/phone-icon.png' alt='phoneIcon'/>
+                    Whatsapp</div>
                   </div>
                 </div>
               )
@@ -159,11 +175,13 @@ const PropertyList = (props)=>{
           </div> 
           : 
           <div className={styles.sidebar}>
-            <p>Link to Q&A</p>
-            <p>FAQ</p>
+              <img src='/assets/icons/AskGuruLogo.svg' alt='askGuru' className={styles.sidebarImage}></img>
+              <p style={{fontSize:'22px', padding: '10px'}}>How Do I Rent A Property In Singapore</p>
+              <p style={{padding: '10px', fontSize: '14px'}}>Get answers from PropertyLah experts</p>
+              <button className={styles.sidebarButtons} >Ask a Question</button>
+              <button className={styles.sidebarButtons} onClick={()=>navigate('/qna')}>Browse Answers</button>
           </div> 
           }
-          
         </div>
       </div>
     </Container>
