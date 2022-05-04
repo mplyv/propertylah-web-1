@@ -1,22 +1,102 @@
 import React, { useState, useEffect } from "react";
-import { Route, Routes, useParams, useNavigate } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import "../../index.css";
+import classes from "./CategoryQuestions.module.css";
 import { getQuestions } from "./API"
+import API from "./API";
 
 import Container from "../UI/Container";
 import Card from "../UI/Card";
 
-const CategoryQuestions = () => {
-  const { category } = useParams();
-  
-  const navigate = useNavigate();
+const CategoryQuestions = (props) => {
+  const [ loading, setLoading ] = useState(false);
+  const [ categoryQuestions, setCategoryQuestions ] = useState([]);
 
+  const { categoryId } = useParams();
+
+  // format categoryId in params
+  const categoryIdMatch = categoryId.match(/[A-Z]+(?![a-z])|[A-Z]?[a-z]+|\d+/g).join(' ')
+
+  useEffect (() => {
+    async function getCategoryQuestions() {
+      setLoading(true);
+      const res = await API.get(`/questions/?category[eq]=${categoryIdMatch}`)
+      // const res = await API.get(`/questions`, {
+      //   params : {
+      //     [category[eq]]: categoryId
+      //   }
+      // })
+      const arr = res.data.data
+      setCategoryQuestions(arr);
+      setLoading(false)
+    }
+    getCategoryQuestions()
+  }, []);
+
+  console.log(categoryQuestions)
+
+  // time function
+  function timeSince(date) {
+
+    var seconds = Math.floor((new Date() - date) / 1000);
+  
+    var interval = seconds / 31536000;
+  
+    if (interval > 1) {
+      return Math.floor(interval) + " years";
+    }
+    interval = seconds / 2592000;
+    if (interval > 1) {
+      return Math.floor(interval) + " months";
+    }
+    interval = seconds / 86400;
+    if (interval > 1) {
+      return Math.floor(interval) + " days";
+    }
+    interval = seconds / 3600;
+    if (interval > 1) {
+      return Math.floor(interval) + " hours";
+    }
+    interval = seconds / 60;
+    if (interval > 1) {
+      return Math.floor(interval) + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
+  }
+  // var aDay = 24*60*60*1000;
+  // console.log(timeSince(new Date(Date.now()-aDay)));
+  // console.log(timeSince(new Date(Date.now()-aDay*2)));
   return (
     <Container>
-      <Card><h1>Hello { category }</h1></Card>
+      { loading ? <div>Loading . . .</div> : (
+        categoryQuestions.map((qn) => {
+          return (
+          <Link to={`/qna/${categoryId}/${qn.id}`} key={qn.id}>
+          <div className={classes.container}>
+            <div key={qn.id} className={classes["name-section"]}>
+              <p className={classes.name}>
+                {qn.firstName} {qn.lastName}
+              </p>
+              <div className={classes.category}>
+                {qn.category}
+              </div>
+            </div>
+            <div className={classes.meta}>
+              <p>asked {timeSince(new Date(qn.createdAt))} ago on {new Date(qn.createdAt).toDateString()}</p>
+            </div>
+            <div className={classes.question}>
+              {qn.question}
+            </div>
+          </div>
+          </Link>
+          
+        )}).slice().sort((a, b) => b.createdAt > a.createdAt ? 1 : -1)
+      )}
+      
+      <Card><h1>Hello { categoryId }</h1></Card>
       <button>Hello</button>
       <div>
-        <h1>{category}</h1>
+        <h1>{categoryId}</h1>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
           pellentesque nec purus id imperdiet. Nunc eu varius velit. Lorem ipsum
@@ -57,6 +137,7 @@ const CategoryQuestions = () => {
         </p>
       </div>
     </Container>
+    
   )
   
 }

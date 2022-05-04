@@ -74,17 +74,20 @@ const CategorySection = ({ questions, setQuestions, totalQuestions }) => {
     { Object.keys(results).map((el, id) => {
       const getNumOfUsers = outputUsers[id];
       return (
-        <div className={classes.card} key={id}>
+        // <Link to={el} key={id}>
+        <Link to={el.split(" ").join("")} key={id}>
+        <div className={classes.card}>
           <div className={classes["card-body"]}>
-            <Link to={el}>{el}</Link>
-            <div>{results[el]} questions</div>
+            <div className={classes["card-category"]}>{el}</div>
+            <div className={classes["card-desc-questions"]}>{results[el]} questions</div>
             { getNumOfUsers.numOfUsers == 1 ? (
-            <div>{getNumOfUsers.numOfUsers} person is looking for advice</div> ) : (
-              <div>{getNumOfUsers.numOfUsers} people are looking for answers</div>
+              <div className={classes["card-desc-persons"]}>{getNumOfUsers.numOfUsers} person is looking for advice</div> ) : (
+              <div className={classes["card-desc-persons"]}>{getNumOfUsers.numOfUsers} people are looking for answers</div>
             )
-            }
+            } 
           </div>
         </div>
+        </Link>
       )
     }
     )}
@@ -93,8 +96,6 @@ const CategorySection = ({ questions, setQuestions, totalQuestions }) => {
     )}
         
     </div>
-    <hr />
-
     </>
   );
 };

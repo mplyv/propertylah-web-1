@@ -27,11 +27,10 @@
   margin-top: 20px;
 }
 
-.num {
+.counter {
   display: inline;
-  padding: 5px 20px;
-  text-align: left;
-  text-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+  padding: 10px 20px;
+  padding-top: 15px;
   color: white;
   background: linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #ebc416de, #f9a825, #ff5722);
   /* -webkit-background-clip: text; */
@@ -39,8 +38,16 @@
   border-radius: 10px;
 }
 
+.num {
+  font-size: 35px;
+  display: inline;
+  text-align: left;
+  text-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+}
+
 .hero-btn {
-  background-color: #a1360b;
+  font-family: inherit;
+  background-color: #e13c30;
   padding: 20px 30px;
   border-radius: 10px;
   position: relative;
@@ -48,7 +55,8 @@
 }
 
 .hero-btn:hover {
-  background-color: #ee8f88;
+  color: #fff;
+  background-color: #a1360b;
   transition: all 0.3s ease-out;
   transition: 300ms;
 }
@@ -105,5 +113,17 @@
 
   .hero-inner > p {
     font-size: 20px;
+  }
+
+  .counter {
+    font-size: 14px;
+    line-height: 24px;
+    display: inline;
+    padding: 5px 20px;
+    padding-top: 8px;
+  }
+
+  .num {
+    font-size: 18px;
   }
 }

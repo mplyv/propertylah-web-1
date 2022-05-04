@@ -17,9 +17,10 @@
 .card {
   display: flex;
   min-width: 14rem;
-  height: 11rem;
+  height: 8rem;
   transition: transform 300ms;
   background-color: #f1f1f1;
+  box-shadow: 1px 1px 5px #33333330;
   border-radius: 10px;
   cursor: pointer;
 }
@@ -35,12 +36,21 @@
 }
 
 .card-category {
+  color: #333;
+  font-weight: 700;
   line-height: 1.4rem;
   margin-bottom: 0.5rem;
 }
 
-.card-description {
-  line-height: 1.2rem;
+.card-desc-questions {
+  color: #aaa;
+  font-size: 15px;
+  line-height: 1.4rem;
+}
+
+.card-desc-persons {
+  font-size: 14px;
+  line-height: 1.4rem;
 }
 
 @media screen and (min-width: 600px) {

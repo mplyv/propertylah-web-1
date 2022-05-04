@@ -6,10 +6,10 @@ const API = axios.create({
 
 export const getQuestions = () => {
   return API.get("/questions");
-}
+};
 
 export const getAnswers = () => {
   return API.get("/answers");
-}
+};
 
 export default API;
