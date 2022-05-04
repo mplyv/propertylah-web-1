@@ -7,6 +7,7 @@ import API from "./API";
 
 import Container from "../UI/Container";
 import Card from "../UI/Card";
+import SearchBar from "./SearchBar/SearchBar";
 
 const CategoryQuestions = (props) => {
   const [ loading, setLoading ] = useState(false);
@@ -68,6 +69,7 @@ const CategoryQuestions = (props) => {
   // console.log(timeSince(new Date(Date.now()-aDay*2)));
   return (
     <Container>
+      <SearchBar placeholder='Search a Question'/>
       { loading ? <div>Loading . . .</div> : (
         categoryQuestions.map((qn) => {
           return (
@@ -87,7 +89,7 @@ const CategoryQuestions = (props) => {
             <div className={classes.question}>
               {qn.question}
             </div>
-          </div>
+              </div>
           </Link>
           
         )}).slice().sort((a, b) => b.createdAt > a.createdAt ? 1 : -1)
