@@ -273,9 +273,9 @@
 }
 .stickySidebar{
     background-color: lightgrey;
-    height: 450px;
+    height: 448px;
     position: sticky;
-    top: 130px;
+    top: 147px;
 }
 .CRUDButton{
     font-size: 13px;
@@ -337,6 +337,7 @@
     margin: auto;
     object-fit: contain;
     padding:auto;
+    height: 500px;
 }
 .linkContainer{
     display:flex;
@@ -376,4 +377,9 @@
     height: 30px;
     width: 30px;
     z-index: 1;
+}
+.avatar{
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
 }

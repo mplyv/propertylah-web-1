@@ -1,8 +1,12 @@
 import { NavLink } from "react-router-dom";
 import Logo from "../../assets/images/propertylahlogo.png";
 import classes from "./Header.module.css";
+import { useSelector } from "react-redux";
+
 
 const Header = (props) => {
+  const auth = useSelector((state) => state.auth);
+
   return (
     <header className={classes.header}>
       <NavLink to="/">
@@ -20,6 +24,11 @@ const Header = (props) => {
           <li>
             <NavLink to="/properties">Properties</NavLink>
           </li>
+          {auth.isAuthenticated?
+            <li>
+              <NavLink to="/properties/agent/47">My Properties</NavLink>
+            </li>
+          :null}
           <li>
             <NavLink to="/qna">Q & A</NavLink>
           </li>

@@ -7,7 +7,7 @@ const PropertyHome = ()=>{
     return(
         <div className={styles.mainContainer}>
             <div className={styles.homepageImageContainer}>
-                <img className={styles.homepageImage} src='assets/icons/HomePage.jpg' alt='propertyHomeImage'></img>
+                <img className={styles.homepageImage} src='assets/icons/HomePage2.jpg' alt='propertyHomeImage'></img>
             </div>
             <div className={styles.linkContainer}>
                 <button className={styles.links} style={{color:'white'}} onClick={()=>{navigate('/properties/rent'); window.scrollTo(0, 0)}}>Rent</button>

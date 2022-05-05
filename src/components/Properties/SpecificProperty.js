@@ -119,13 +119,13 @@ const SpecificProperty = ()=>{
                     {propertyData.User === undefined? null: 
                     <div className={styles.stickySidebar}>
                         <div className={styles.sidebarSpecificProperty}>
-                            <div>
-                                {/* <img ></img> //todo add image for agent avatar */}
-                                <>
+                            <div style={{display:'flex',alignItems:'center'}}>
+                                <img className={styles.avatar} src={`http://68.183.183.118:4088/img/users/${propertyData.User.photo}`} alt='avatar'></img> 
+                                <div>
                                     <p>{propertyData.User.firstName} {propertyData.User.lastName}</p>
                                     <p>ERA REALTY NETWORK PTE LTD </p>
                                     <p>CEA: R027564Z / L3002382K</p>
-                                </>
+                                </div>
                             </div>
                             <div className={styles.whatsappButtonSpecificProperty} onClick={(e)=>{
                                 e.stopPropagation();
