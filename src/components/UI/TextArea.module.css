@@ -11,13 +11,18 @@
   font-family: inherit;
   width: 60vw;
   padding: 10px;
-  margin: 5px 0px;
+  margin: 5px 5px;
   border-radius: 5px;
   resize: none;
 }
 
 .textarea:focus {
   outline: auto;
+}
+
+.label {
+  color: #333;
+  margin: 0 5px;
 }
 
 .errorMessage {

@@ -1,3 +1,9 @@
+.loading {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -11,6 +17,11 @@
   box-shadow: 0px 0px 3px #33333330;
 }
 
+.tags-section {
+  display: flex;
+  align-items: flex-start;
+}
+
 .name-section {
   display: flex;
   flex-direction: column;
@@ -21,13 +32,14 @@
   color: #333;
   font-size: 15px;
   font-weight: 700;
+  margin: 0 5px;
   margin-bottom: 10px;
 }
 .category {
   font-size: 12px;
   color: rgb(162, 54, 11);
   padding: 5px 10px;
-  margin: 10px 0px;
+  margin: 10px 5px;
   background-color: #e03d3120;
   border-radius: 7px;
 }
@@ -35,15 +47,84 @@
 .meta {
   font-size: 14px;
   color: gray;
+  margin: 0 5px;
   margin-bottom: 20px;
 }
 
 .question {
   color: #333;
   padding-bottom: 20px;
+  margin: 0 5px;
 }
 
 .edit-reply {
+  display: flex;
+  margin: 0 5px;
+}
+
+.edit-btn {
   font-size: 14px;
   color: gray;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.edit-btn:hover {
+  color: #333;  
+}
+
+.reply-btn {
+  font-size: 14px;
+  color: gray;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.reply-btn:hover {
+  color: #333;  
+}
+
+.slide-in-down {
+  -webkit-animation-name: slideInDown;
+  animation-name: slideInDown;
+}
+
+@keyframes slideInDown {
+  from {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.edit-container {
+  display: none;
+  flex-direction: column;
+  padding: 15px 15px;
+  margin: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  border: 2px solid rgb(162, 54, 11);
+  flex-grow: 1;
+  transition: transform 200ms;
+  box-shadow: 0px 0px 3px #33333330;
+}
+
+.ans-container {
+  flex-direction: column;
+  padding: 15px 15px;
+  margin: 1rem;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  /* border: 2px solid rgb(162, 54, 11); */
+  flex-grow: 1;
+  transition: transform 200ms;
+  box-shadow: 0px 0px 3px #33333330;
 }

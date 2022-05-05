@@ -10,6 +10,7 @@
   width: 60vw;
   border: 1px solid #333;
   padding: 10px;
+  margin: 0 5px;
   margin-top: 5px;
   margin-bottom: 10px;
   border-radius: 5px;
@@ -28,8 +29,8 @@
 }
 
 .label {
-  /* font-size: 13px; */
   color: #333;
+  margin: 0 5px;
 }
 
 .errorMessage {

@@ -57,7 +57,7 @@ const QuestionForm = (props) => {
   }
 
   const handleUpdate = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     setValues({ ...values , [e.target.name] : e.target.value })
 
     try {
