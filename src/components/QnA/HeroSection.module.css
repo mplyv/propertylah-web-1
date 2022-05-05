@@ -1,0 +1,129 @@
+.hero-container {
+  width: 100vw;
+  height: 65vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(#0001, #0001), url("../../assets/images/qna/qna-hero.jpg");
+  background-position: right;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.hero-inner {
+  padding: 0 12rem;
+}
+
+.hero-inner > h1 {
+  font-size: 60px;
+  text-align: left;
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+}
+
+.hero-inner > p {
+  color: #333;
+  font-size: 24px;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.counter {
+  display: inline;
+  padding: 10px 20px;
+  padding-top: 15px;
+  color: white;
+  background: linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #ebc416de, #f9a825, #ff5722);
+  /* -webkit-background-clip: text; */
+  /* -webkit-text-fill-color: transparent; */
+  border-radius: 10px;
+}
+
+.num {
+  font-size: 35px;
+  display: inline;
+  text-align: left;
+  text-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+}
+
+.hero-btn {
+  font-family: inherit;
+  background-color: #e13c30;
+  padding: 20px 30px;
+  border-radius: 10px;
+  position: relative;
+  margin: 20px 0px;
+}
+
+.hero-btn:hover {
+  color: #fff;
+  background-color: #a1360b;
+  transition: all 0.3s ease-out;
+  transition: 300ms;
+}
+
+@media screen and (max-width: 960px) {
+  .hero-container {
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(#0001, #0001), url("../../assets/images/qna/qna-hero-tablet.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .hero-inner {
+    padding: 0 5rem;
+    margin-bottom: 100px;
+  }
+
+  .hero-inner > h1 {
+    font-size: 50px;
+  }
+
+  .hero-inner > p {
+    font-size: 20px;
+  }
+}
+
+
+@media screen and (max-width: 480px) {
+  .hero-container {
+    width: 100vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(#0001, #0001), url("../../assets/images/qna/qna-hero-mobile.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .hero-inner {
+    padding: 0 2rem;
+    margin-bottom: 100px;
+  }
+
+  .hero-inner > h1 {
+    font-size: 40px;
+  }
+
+  .hero-inner > p {
+    font-size: 20px;
+  }
+
+  .counter {
+    font-size: 14px;
+    line-height: 24px;
+    display: inline;
+    padding: 5px 20px;
+    padding-top: 8px;
+  }
+
+  .num {
+    font-size: 18px;
+  }
+}

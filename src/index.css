@@ -2,7 +2,7 @@
 
 :root {
   --pri-color: #e13c30;
-  --pri-dark: rgb(161, 54, 11);
+  --pri-dark: rgb(162, 54, 11);
   --pri-light: #f5574c;
   --pri-lightest: #ff8e86;
   --sec-color: #007985;
@@ -25,12 +25,14 @@
 
 html {
   font-family: "Rubik", sans-serif;
+  overflow-x: hidden;
 }
 
 body {
   background-color: fff;
   color: var(--grey-dark);
   margin-top: 60px;
+  overflow-x: hidden;
 }
 
 .container {
