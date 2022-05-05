@@ -108,6 +108,7 @@ const SpecificQuestion = () => {
       <div className={classes["edit-reply"]}>
         <div className={classes["edit-btn"]} onClick={() => slideToggle(editQn.current)}>Edit</div>
         <div className={classes["reply-btn"]}>Reply </div>
+        <div className={classes["reply-counter"]}>{specificAnswers.length} answers</div>
       </div>
     </div>
    
