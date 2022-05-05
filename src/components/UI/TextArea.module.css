@@ -11,7 +11,7 @@
   font-family: inherit;
   width: 60vw;
   padding: 10px;
-  margin: 5px 0px;
+  margin: 5px 5px;
   border-radius: 5px;
   resize: none;
 }
@@ -20,10 +20,16 @@
   outline: auto;
 }
 
+.label {
+  color: #333;
+  margin: 0 5px;
+}
+
 .errorMessage {
   font-size: 12px;
   color: red;
   display: none;
+  margin: 0 5px;
 }
 
 .textarea:invalid[focused="true"]{
