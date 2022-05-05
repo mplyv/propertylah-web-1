@@ -79,9 +79,12 @@ const CategorySection = ({ questions, setQuestions, totalQuestions }) => {
         <div className={classes.card}>
           <div className={classes["card-body"]}>
             <div className={classes["card-category"]}>{el}</div>
-            <div className={classes["card-desc-questions"]}>{results[el]} questions</div>
+            <div className={classes["card-desc-questions"]}>
+              { results[el] == 1 ? ( <p>{results[el]} question</p> ) : ( <p>{results[el]} questions</p> )}
+            </div>
             { getNumOfUsers.numOfUsers == 1 ? (
-              <div className={classes["card-desc-persons"]}>{getNumOfUsers.numOfUsers} person is looking for advice</div> ) : (
+              <div className={classes["card-desc-persons"]}>{getNumOfUsers.numOfUsers} person is looking for advice</div> 
+            ) : (
               <div className={classes["card-desc-persons"]}>{getNumOfUsers.numOfUsers} people are looking for answers</div>
             )
             } 
