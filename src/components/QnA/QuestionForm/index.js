@@ -131,7 +131,7 @@ const QuestionForm = (props) => {
           label="Category"
           name="category"
           placeholder="Select category"
-          value={values.category}
+          value={fillFields.category}
           onChange={onDropdownChangeUpdate}
           errorMessage="Please select a suitable category for your question"
           required={true}
