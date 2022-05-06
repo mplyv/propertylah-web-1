@@ -1,9 +1,17 @@
-import { useNavigate } from "react-router-dom"
-import styles from './property.module.css'
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styles from './property.module.css';
+import Modal from "../QnA/Modal";
 
 //todo home screen
 const PropertyHome = ()=>{
     const navigate = useNavigate();
+    const [ showModal, setShowModal ] = useState(false);
+
+    const openModal = () => {
+        setShowModal(true);
+    };
+
     return(
         <div className={styles.mainContainer}>
             <div className={styles.homepageImageContainer}>
@@ -18,7 +26,7 @@ const PropertyHome = ()=>{
                     <img src='/assets/icons/AskGuruLogo.svg' alt='askGuru' className={styles.sidebarImage}></img>
                     <p style={{fontSize:'22px', padding: '10px'}}>How Do I Rent A Property In Singapore</p>
                     <p style={{padding: '10px', fontSize: '14px'}}>Get answers from PropertyLah experts</p>
-                    <button className={styles.sidebarButtons} >Ask a Question</button>
+                    <button className={styles.sidebarButtons} onClick={openModal}>Ask a Question</button>
                     <button className={styles.sidebarButtons} onClick={()=>navigate('/qna')}>Browse Answers</button>
                 </div>
                 <div className={styles.sidebar}>
@@ -28,6 +36,7 @@ const PropertyHome = ()=>{
                     <button className={styles.sidebarButtons} onClick={()=>navigate('/articles')}>Read Articles</button>
                 </div>
             </div>
+            { showModal ? <Modal setShowModal={setShowModal} /> : null }
         </div>
     )
 }

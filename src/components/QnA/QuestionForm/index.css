@@ -4,7 +4,7 @@
   padding: 20px 30px;
   border-radius: 10px;
   position: relative;
-  margin: 20px 0px;
+  margin: 20px 5px;
 }
 
 .submit-btn:hover {
@@ -15,5 +15,6 @@
 }
 
 .form-intro {
+  margin: 0 5px;
   margin-bottom: 10px;
 }

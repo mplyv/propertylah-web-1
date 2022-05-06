@@ -57,7 +57,7 @@ const QuestionForm = (props) => {
   }
 
   const handleUpdate = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     setValues({ ...values , [e.target.name] : e.target.value })
 
     try {
@@ -131,7 +131,7 @@ const QuestionForm = (props) => {
           label="Category"
           name="category"
           placeholder="Select category"
-          value={values.category}
+          value={fillFields.category}
           onChange={onDropdownChangeUpdate}
           errorMessage="Please select a suitable category for your question"
           required={true}
