@@ -1,12 +1,15 @@
 import { authActions } from "./auth-slice";
 
-export const saveAuth = (user) => {
+export const saveAuth = (user, rememberMe = false) => {
   return (dispatch) => {
     const { id, firstName, role, token } = user;
-    localStorage.setItem(
-      "auth",
-      JSON.stringify({ token, firstName, role, id })
-    );
+
+    if (rememberMe)
+      localStorage.setItem(
+        "auth",
+        JSON.stringify({ token, firstName, role, id })
+      );
+
     dispatch(authActions.saveAuth(user));
   };
 };
