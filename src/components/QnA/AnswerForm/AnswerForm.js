@@ -92,7 +92,7 @@ const AnswerForm = (props) => {
             errorMessage="Please provide a valid answer." 
             required={true}
               />
-               <Dropdown 
+            <Dropdown 
             label="Category"
             name="category"
             placeholder="Select category"
