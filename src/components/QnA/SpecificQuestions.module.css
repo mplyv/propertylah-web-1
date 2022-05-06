@@ -115,7 +115,7 @@
   }
 }
 
-.edit-container {
+.edit-qn-container {
   display: none;
   flex-direction: column;
   padding: 15px 15px;
@@ -141,7 +141,7 @@
 }
 
 .ans-container:hover {
-  transform: scale(1.01);
+  /* transform: scale(1.01); */
   opacity: 1;
   border: 2px solid rgba(162, 54, 11);
 }
