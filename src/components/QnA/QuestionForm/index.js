@@ -1,21 +1,23 @@
 import { useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import "./index.css";
+import API from "../API";
+
 import FormInput from "../../UI/FormInput";
 import TextArea from "../../UI/TextArea";
 import Dropdown from "../../UI/Dropdown";
-import API from "../API";
 
 const QuestionForm = (props) => {
-  const fillFields = props.fillFields;
-  // console.log(fillFields)
+  const fillQnFields = props.fillQnFields;
+  const getSpecificQuestion = props.getSpecificQuestion;
+  // console.log(fillQnFields)
 
   const [ values, setValues ] = useState({
-    question : (fillFields ? fillFields.question : ""),
-    category : (fillFields ? fillFields.category : ""),
-    firstName: (fillFields ? fillFields.firstName : ""),
-    lastName: (fillFields ? fillFields.lastName : ""),
-    email: (fillFields ? fillFields.email : ""),
+    question : (fillQnFields ? fillQnFields.question : ""),
+    category : (fillQnFields ? fillQnFields.category : ""),
+    firstName: (fillQnFields ? fillQnFields.firstName : ""),
+    lastName: (fillQnFields ? fillQnFields.lastName : ""),
+    email: (fillQnFields ? fillQnFields.email : ""),
   });
 
   const { id } = useParams();
@@ -57,7 +59,7 @@ const QuestionForm = (props) => {
   }
 
   const handleUpdate = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     setValues({ ...values , [e.target.name] : e.target.value })
 
     try {
@@ -71,6 +73,7 @@ const QuestionForm = (props) => {
         "email" : values.email
       })
       if ( res.status === 200 ) {
+        getSpecificQuestion();
         console.log(`You have updated a question: ${JSON.stringify(res)}`)
       } else {
         throw new Error("Oops, something went wrong. Please try again.");
@@ -79,6 +82,7 @@ const QuestionForm = (props) => {
     } catch (err) {
       console.log("PATCH error", err.message);
     }
+    
   }
 
   const handleSubmit = async (e) => {
@@ -111,10 +115,10 @@ const QuestionForm = (props) => {
   return (
     <div>
         <div className="form-intro">
-          <h1>{ fillFields ? props.title : `Ask Your Question` }</h1>
-          <p>{ fillFields ? props.desc : `Our PropertyLah experts will answer within 24 hours.` }</p>
+          <h1>{ fillQnFields ? props.title : `Ask Your Question` }</h1>
+          <p>{ fillQnFields ? props.desc : `Our PropertyLah experts will answer within 24 hours.` }</p>
         </div>
-        { fillFields ? (
+        { fillQnFields ? (
           
           <form onSubmit={handleUpdate}>
           <TextArea 
@@ -125,18 +129,18 @@ const QuestionForm = (props) => {
           onChange={onChangeUpdate} 
           errorMessage="Please provide a valid question." 
           required={true}
-          defaultValue={fillFields.question}
+          defaultValue={fillQnFields.question}
           />
           <Dropdown 
           label="Category"
           name="category"
           placeholder="Select category"
-          value={fillFields.category}
+          value={fillQnFields.category}
           onChange={onDropdownChangeUpdate}
           errorMessage="Please select a suitable category for your question"
           required={true}
           options={Object.keys(categoryOptions)}
-          defaultValue={fillFields.category}
+          defaultValue={fillQnFields.category}
           />
           <FormInput 
           label="First Name" 
@@ -146,7 +150,7 @@ const QuestionForm = (props) => {
           onChange={onChangeUpdate} 
           errorMessage="Please enter your first name."
           required={true}
-          defaultValue={fillFields.firstName}
+          defaultValue={fillQnFields.firstName}
           />
           <FormInput 
           label="Last Name" 
@@ -156,7 +160,7 @@ const QuestionForm = (props) => {
           onChange={onChangeUpdate} 
           errorMessage="Please enter your last name." 
           required={true}
-          defaultValue={fillFields.lastName}
+          defaultValue={fillQnFields.lastName}
           />
           <FormInput 
           label="Email" 
@@ -166,7 +170,7 @@ const QuestionForm = (props) => {
           onChange={onChangeUpdate} 
           errorMessage="Please provide a valid email address." 
           required={true}
-          defaultValue={fillFields.email}
+          defaultValue={fillQnFields.email}
           />
           <button className="submit-btn">Update Question</button>
           </form>
