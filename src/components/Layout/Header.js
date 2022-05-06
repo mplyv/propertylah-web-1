@@ -6,24 +6,16 @@ import { useNavigate } from "react-router-dom";
 
 import { clearAuth } from "../../store/auth-thunks";
 import { Button } from "@mui/material";
-import { useEffect, useState } from "react";
 
 const Header = (props) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [isLoggedIn, setIsLoggedIn] = useState("false");
-
-  useEffect(() => {
-    if (isAuthenticated) setIsLoggedIn(true);
-  }, [isAuthenticated]);
-
   const logoutHandler = () => {
     console.log("logging out");
     dispatch(clearAuth());
-    setIsLoggedIn(false);
-    navigate("/sample");
+    navigate("/login");
   };
 
   return (
