@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`match propertyType snapshot for DropdownList 1`] = `
+<select
+  className="filterSearchBarButton"
+  data-testid="dropdownListTest"
+  onChange={[MockFunction]}
+  value="All"
+>
+  <option
+    data-testid="test-Property Type: All"
+  >
+    Property Type: All
+  </option>
+  <option
+    data-testid="test-HDB"
+  >
+    HDB
+  </option>
+  <option
+    data-testid="test-Condominium"
+  >
+    Condominium
+  </option>
+  <option
+    data-testid="test-Apartment"
+  >
+    Apartment
+  </option>
+</select>
+`;
