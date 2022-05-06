@@ -23,7 +23,7 @@ const SearchBar = ({ placeholder}) => {
             console.log(error)
            }}
               fetchData()
-                 })
+                 },[categoryIdMatch])
     
     
     //search for word typed in the search bar
