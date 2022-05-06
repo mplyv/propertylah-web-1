@@ -9,6 +9,9 @@ import QuestionForm from "./QuestionForm";
 import { slideToggle } from "../UI/SlideToggle";
 import { timeSince } from "../UI/TimeSince";
 
+//delete before push
+import AnswerForm from "./AnswerForm/AnswerForm";
+
 const SpecificQuestion = () => {
   const [ specificQuestion, setSpecificQuestion ] = useState([]);
   const [ specificAnswers, setSpecificAnswers ] = useState([]);
@@ -187,7 +190,7 @@ const SpecificQuestion = () => {
       </div>
       <QuestionForm title="Edit Question" desc={`Hello ${specificQuestion.firstName}, You can update this question (ID:${specificQuestion.id}) anytime 😊`} fillFields={fillFields} setFillFields={setFillFields} key={id} />
     </div>  */}
-
+    <AnswerForm title="Answer Question" desc={`Hello ${specificQuestion.firstName}, You can update this answer (ID:${specificQuestion.id}) anytime 😊`} fillFields={fillFields} setFillFields={setFillFields} key={id} />
     </Container>
   );
 };
