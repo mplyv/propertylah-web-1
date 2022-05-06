@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { saveAuth } from "../../store/auth-thunks";
-import { NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 
 // MUI
 import CircularProgress from "@mui/material/CircularProgress";
@@ -26,6 +26,7 @@ const defaultInputs = {
 
 const Signup = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [signup, { isLoading, isError, error }] = useSignupMutation();
   const [formInputs, setFormInputs] = useState(defaultInputs);
@@ -43,9 +44,10 @@ const Signup = () => {
 
     try {
       const user = await signup(formInputs);
-      if (!user.error) dispatch(saveAuth(user.data.data));
-
-      // signup success - to profile page
+      if (!user.error) {
+        dispatch(saveAuth(user.data.data));
+        navigate("/profile");
+      }
     } catch (error) {
       // api call error - error connecting - pls check your network or try again later.
       console.log("catch error", error);
