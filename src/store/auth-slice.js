@@ -14,7 +14,6 @@ const authSlice = createSlice({
   reducers: {
     saveAuth(state, { payload }) {
       const { id, role, firstName, token } = payload;
-      console.log("[auth-slice.js] payload ", id, firstName);
       state.id = id;
       state.role = role;
       state.firstName = firstName;
@@ -22,7 +21,11 @@ const authSlice = createSlice({
       state.isAuthenticated = !!token;
     },
     clearAuth(state) {
-      state = initialAuthState;
+      state.id = null;
+      state.role = null;
+      state.firstName = null;
+      state.token = null;
+      state.isAuthenticated = false;
     },
   },
 });

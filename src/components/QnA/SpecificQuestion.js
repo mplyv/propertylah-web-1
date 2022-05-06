@@ -9,14 +9,24 @@ import QuestionForm from "./QuestionForm";
 import { slideToggle } from "../UI/SlideToggle";
 import { timeSince } from "../UI/TimeSince";
 
+//delete before push
+import AnswerForm from "./AnswerForm/AnswerForm";
+
 const SpecificQuestion = () => {
   const [ specificQuestion, setSpecificQuestion ] = useState([]);
   const [ specificAnswers, setSpecificAnswers ] = useState([]);
   const [ fillFields, setFillFields ] = useState({});
+  const [ show, setShow ] = useState(false);
+  const [ selected, setSelected ] = useState(null);
   // using useRef hook
   const editQn = useRef(null);
   const editAns = useRef(null);
 
+  // toggle edit btn in specific ans
+  const toggleEditAns = (i) => {
+    setSelected(i);
+    setShow(!show);
+  }
 
   // get functions with useForm() hook
   const { register, handleSubmit, reset } = useForm();
@@ -114,7 +124,7 @@ const SpecificQuestion = () => {
       </div>
     </div>
    
-    <div ref={editQn} className={classes["edit-container"]}>
+    <div ref={editQn} className={classes["edit-qn-container"]}>
       <div className={classes["edit-reply"]}>
         <div className={classes["edit-btn"]} onClick={() => slideToggle(editQn.current)}>Close</div>
       </div>
@@ -123,11 +133,11 @@ const SpecificQuestion = () => {
     
 
 
-    { ( specificAnswers.length == 0 ) ? <div className={classes.loading}>Oops . . . No answers for this question yet. Answer this question and earn reputation points! 🤗</div> : (
-      specificAnswers.map((ans) => {
+    { ( specificAnswers.length > 0 ) ? 
+      specificAnswers.map((ans, i) => {
         return (
           <>
-          <div className={classes["ans-container"]}>
+          <div className={classes["ans-container"]} key={i}>
             <div className={classes["tags-section"]}>
               <div className={classes.category}>
                 {ans.category}
@@ -148,24 +158,39 @@ const SpecificQuestion = () => {
               {ans.answer}
             </div>
             <div className={classes["edit-reply"]}>
-              <div className={classes["edit-btn"]} onClick={() => slideToggle(editAns.current)}>Edit</div>
+              <div className={classes["edit-btn"]} onClick={() => [toggleEditAns(i), setShow(!show)]}>Edit</div>
               <div className={classes["reply-btn"]}>Reply </div>
             </div>
           </div>
 
-          </>
+          { selected === i && show ? 
+            <div ref={editAns} className={classes["ans-container"]}>
+            <div className={classes["edit-reply"]}>
+              <div className={classes["edit-btn"]} onClick={() => setShow(!show)}>Close</div>
+            </div>
+            <QuestionForm title="Edit Question" desc={`Hello ${specificQuestion.firstName}, You can update this question (ID:${specificQuestion.id}) anytime 😊`} fillFields={fillFields} setFillFields={setFillFields} key={id} />
+            </div> 
+          : null
+          }
+        </>
         ) 
-      })
+      }) : (
+        <>
+        <div className={classes.loading}>Oops . . . No answers for this question yet. Answer this question and earn reputation points! 🤗</div>
+        <div className={classes["no-answers"]}> 
+          <button className={classes["cta-btn"]}>Answer now</button>
+        </div>
+        </>
       )
     }
 
-    <div ref={editAns} className={classes["edit-container"]}>
+    {/* <div ref={editAns} className={classes["edit-container"]}>
       <div className={classes["edit-reply"]}>
         <div className={classes["edit-btn"]} onClick={() => slideToggle(editAns.current)}>Close</div>
       </div>
       <QuestionForm title="Edit Question" desc={`Hello ${specificQuestion.firstName}, You can update this question (ID:${specificQuestion.id}) anytime 😊`} fillFields={fillFields} setFillFields={setFillFields} key={id} />
-    </div> 
-
+    </div>  */}
+    <AnswerForm title="Answer Question" desc={`Hello ${specificQuestion.firstName}, You can update this answer (ID:${specificQuestion.id}) anytime 😊`} fillFields={fillFields} setFillFields={setFillFields} key={id} />
     </Container>
   );
 };

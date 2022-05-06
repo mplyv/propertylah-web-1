@@ -7,12 +7,14 @@ import Footer from "./components/Layout/Footer";
 import Home from "./components/Home/Home";
 import Properties from "./components/Properties/Properties";
 import Articles from "./components/Articles/Articles";
-import SignUp from "./components/Users/SignUp";
-import Login from "./components/Users/Login";
+// import SignUp from "./components/Users/SignUp";
+// import Login from "./components/Users/Login";
 import QnA from "./components/QnA/QnA";
 import Sample from "./components/Sample/Sample";
 import Profile from "./components/Users/Profile";
 
+import Login from "./components/Auth/Login";
+import Signup from "./components/Auth/Signup";
 import { fetchAuth } from "./store/auth-thunks";
 
 function App() {
@@ -29,7 +31,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        {!isAuthenticated && <Route path="/signup" element={<SignUp />} />}
+        {!isAuthenticated && <Route path="/signup" element={<Signup />} />}
         <Route path="/login" element={<Login />} />
         {isAuthenticated && <Route path="/profile" element={<Profile />} />}
         <Route path="/properties/*" element={<Properties />} />

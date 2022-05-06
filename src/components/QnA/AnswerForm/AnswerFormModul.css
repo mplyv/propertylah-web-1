@@ -1,0 +1,20 @@
+.submit-btn {
+  font-family: inherit;
+  background-color: #e13c30;
+  padding: 20px 30px;
+  border-radius: 10px;
+  position: relative;
+  margin: 20px 5px;
+}
+
+.submit-btn:hover {
+  color: #fff;
+  background-color: #a1360b;
+  transition: all 0.3s ease-out;
+  transition: 300ms;
+}
+
+.form-intro {
+  margin: 0 5px;
+  margin-bottom: 10px;
+}
