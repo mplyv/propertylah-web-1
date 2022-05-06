@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`match PSF snapshot 1`] = `
+<div
+  className="horizontalContainerPopup"
+>
+  <input
+    className="input"
+    data-testid="test-MinPSF"
+    id="MinPSF"
+    onChange={[MockFunction]}
+    placeholder="Min"
+    type="number"
+    value={0}
+  />
+  <input
+    className="input"
+    data-testid="test-MaxPSF"
+    id="MaxPSF"
+    onChange={[MockFunction]}
+    placeholder="Max"
+    type="number"
+    value={100}
+  />
+</div>
+`;
+
+exports[`match TOPYear snapshot 1`] = `
+<div
+  className="horizontalContainerPopup"
+>
+  <input
+    className="input"
+    data-testid="test-MinTOP"
+    id="MinTOP"
+    onChange={[MockFunction]}
+    placeholder="Min"
+    type="number"
+    value={1990}
+  />
+  <input
+    className="input"
+    data-testid="test-MaxTOP"
+    id="MaxTOP"
+    onChange={[MockFunction]}
+    placeholder="Max"
+    type="number"
+    value={2020}
+  />
+</div>
+`;
+
+exports[`match floorsize snapshot 1`] = `
+<div
+  className="horizontalContainerPopup"
+>
+  <input
+    className="input"
+    data-testid="test-MinFloorSize"
+    id="MinFloorSize"
+    onChange={[MockFunction]}
+    placeholder="Min"
+    type="number"
+    value={0}
+  />
+  <input
+    className="input"
+    data-testid="test-MaxFloorSize"
+    id="MaxFloorSize"
+    onChange={[MockFunction]}
+    placeholder="Max"
+    type="number"
+    value={100}
+  />
+</div>
+`;
+
+exports[`match price snapshot 1`] = `
+<div
+  className="horizontalContainerPopup"
+>
+  <input
+    className="input"
+    data-testid="test-MinPrice"
+    id="MinPrice"
+    onChange={[MockFunction]}
+    placeholder="Min"
+    type="number"
+    value={0}
+  />
+  <input
+    className="input"
+    data-testid="test-MaxPrice"
+    id="MaxPrice"
+    onChange={[MockFunction]}
+    placeholder="Max"
+    type="number"
+    value={100}
+  />
+</div>
+`;

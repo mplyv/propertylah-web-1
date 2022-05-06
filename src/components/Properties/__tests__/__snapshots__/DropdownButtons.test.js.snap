@@ -1,0 +1,181 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`match bathroom snapshot 1`] = `
+<div
+  className="horizontalContainerPopup"
+>
+  <div
+    className="selected"
+    data-testid="All Qty Bathrooms"
+    id="All Qty Bathrooms"
+    onClick={[MockFunction]}
+  >
+    All
+  </div>
+  <div
+    className="filterSearchBarButton"
+    data-testid="1bath"
+    id="1bath"
+    onClick={[MockFunction]}
+  >
+    1
+  </div>
+  <div
+    className="filterSearchBarButton"
+    data-testid="2bath"
+    id="2bath"
+    onClick={[MockFunction]}
+  >
+    2
+  </div>
+  <div
+    className="filterSearchBarButton"
+    data-testid="3bath"
+    id="3bath"
+    onClick={[MockFunction]}
+  >
+    3
+  </div>
+  <div
+    className="filterSearchBarButton"
+    data-testid="4bath"
+    id="4bath"
+    onClick={[MockFunction]}
+  >
+    4
+  </div>
+  <div
+    className="filterSearchBarButton"
+    data-testid="5+bath"
+    id="5+bath"
+    onClick={[MockFunction]}
+  >
+    5+
+  </div>
+</div>
+`;
+
+exports[`match bedrooms snapshot 1`] = `
+<div
+  className="horizontalContainerPopup"
+>
+  <div
+    className="selected"
+    data-testid="All Qty Bedrooms"
+    id="All Qty Bedrooms"
+    onClick={[MockFunction]}
+  >
+    All
+  </div>
+  <div
+    className="filterSearchBarButton"
+    data-testid="1bed"
+    id="1bed"
+    onClick={[MockFunction]}
+  >
+    1
+  </div>
+  <div
+    className="filterSearchBarButton"
+    data-testid="2bed"
+    id="2bed"
+    onClick={[MockFunction]}
+  >
+    2
+  </div>
+  <div
+    className="filterSearchBarButton"
+    data-testid="3bed"
+    id="3bed"
+    onClick={[MockFunction]}
+  >
+    3
+  </div>
+  <div
+    className="filterSearchBarButton"
+    data-testid="4bed"
+    id="4bed"
+    onClick={[MockFunction]}
+  >
+    4
+  </div>
+  <div
+    className="filterSearchBarButton"
+    data-testid="5+bed"
+    id="5+bed"
+    onClick={[MockFunction]}
+  >
+    5+
+  </div>
+</div>
+`;
+
+exports[`match propertyType snapshot 1`] = `
+<div
+  className="horizontalContainerPopup"
+>
+  <div
+    className="selected"
+    data-testid="All Property"
+    id="All Property"
+    onClick={[MockFunction]}
+  >
+    All
+  </div>
+  <div
+    className="filterSearchBarButton"
+    data-testid="HDB"
+    id="HDB"
+    onClick={[MockFunction]}
+  >
+    HDB
+  </div>
+  <div
+    className="filterSearchBarButton"
+    data-testid="Apartment"
+    id="Apartment"
+    onClick={[MockFunction]}
+  >
+    Apartment
+  </div>
+  <div
+    className="filterSearchBarButton"
+    data-testid="Condominium"
+    id="Condominium"
+    onClick={[MockFunction]}
+  >
+    Condominium
+  </div>
+</div>
+`;
+
+exports[`match tenure snapshot 1`] = `
+<div
+  className="horizontalContainerPopup"
+>
+  <div
+    className="selected"
+    data-testid="All Tenure"
+    id="All Tenure"
+    onClick={[MockFunction]}
+  >
+    All
+  </div>
+  <div
+    className="filterSearchBarButton"
+    data-testid="Freehold"
+    id="Freehold"
+    onClick={[MockFunction]}
+  >
+    Freehold
+  </div>
+  <div
+    className="filterSearchBarButton"
+    data-testid="Leasehold"
+    id="Leasehold"
+    onClick={[MockFunction]}
+  >
+    Leasehold
+  </div>
+</div>
+`;

@@ -2,10 +2,10 @@ import styles from '../property.module.css'
 
 const DropdownList = (props)=>{
     return (
-        <select id={props.id} className={styles[props.className]} onChange={props.onChange} value={props.value}>
+        <select data-testid="dropdownListTest" id={props.id} className={styles[props.className]} onChange={props.onChange} value={props.value}>
             {props.options.map((selection)=>{
                 return(
-                    <option key={selection}>{selection}</option>
+                    <option data-testid={`test-${selection}`} key={selection}>{selection}</option>
                 )
             })}
         </select>

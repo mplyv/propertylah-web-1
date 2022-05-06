@@ -181,7 +181,7 @@ const PropertyList = (props)=>{
           {params.sellerId? 
           <div className={styles.stickySidebar} style={{backgroundColor: 'white'}}>
             <div className={styles.sidebarSpecificProperty}>
-              <PopupComponent name='Add' propertyData={''}/>
+              <PopupComponent name='Add A Property' propertyData={''}/>
             </div> 
           </div> 
           : 

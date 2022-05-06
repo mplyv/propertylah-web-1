@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`match source snapshot 1`] = `
+Array [
+  <img
+    alt="image1"
+    className="image"
+    data-testid="scrollingImage"
+    src="/assets/property-images/Sky-Vue-Ang-Mo-Kio-Bishan-Thomson-Singapore-1.jpg"
+  />,
+  <button
+    className="imageButtonPrev"
+    data-testid="prevButton"
+    onClick={[Function]}
+    style={
+      Object {
+        "padding": "0px",
+      }
+    }
+  >
+    &lt;
+  </button>,
+  <button
+    className="imageButtonNext"
+    data-testid="nextButton"
+    onClick={[Function]}
+    style={
+      Object {
+        "left": "538px",
+        "padding": "0px",
+      }
+    }
+  >
+    &gt;
+  </button>,
+]
+`;

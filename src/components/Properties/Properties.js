@@ -7,9 +7,6 @@ import {
 } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-
-// todo add authctx here and protect agent route
-
 const Properties = ()=>{
   const auth = useSelector((state) => state.auth);
 
