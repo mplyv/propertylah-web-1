@@ -8,6 +8,7 @@ import { clearAuth } from "../../store/auth-thunks";
 import { Button } from "@mui/material";
 
 const Header = (props) => {
+  const auth = useSelector((state) => state.auth);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ const Header = (props) => {
           </li>
           {isAuthenticated ? (
             <li>
-              <NavLink to="/properties/agent/47">My Properties</NavLink>
+              <NavLink to={`/properties/agent/${auth.id}`}>My Properties</NavLink>
             </li>
           ) : null}
           <li>

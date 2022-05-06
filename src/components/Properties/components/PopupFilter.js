@@ -109,7 +109,7 @@ const PopupFilter = (props) => {
     const contentStyle = { background: 'white', width:'600px', height:'60vh', overflowY: "auto", padding:'0px 0px'};
 
     return(
-        <div>
+        <>
             <div data-testid='test-PopupFilter' className={styles.filterSearchBarButton} onClick={()=>{setOpen(o => !o)}}>Filter</div>
             <Popup  open={open} onClose={closeModal} modal {...{ contentStyle }}>
                 <div data-testid='test-Modal'>
@@ -153,7 +153,7 @@ const PopupFilter = (props) => {
                     </form>
                 </div>
             </Popup>
-        </div>
+        </>
     )
 };
 
