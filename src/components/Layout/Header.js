@@ -52,6 +52,11 @@ const Header = (props) => {
           <li>
             <NavLink to="/properties">Properties</NavLink>
           </li>
+          {isAuthenticated?
+            <li>
+              <NavLink to="/properties/agent/47">My Properties</NavLink>
+            </li>
+          :null}
           <li>
             <NavLink to="/qna">Q & A</NavLink>
           </li>

@@ -151,9 +151,12 @@ const PropertyList = (props)=>{
                     <p>Distance to MRT</p>
                   </div>
                   <div className={styles.agentCard}>
-                    <div>
-                      <p>Listed by {propertyData.User.firstName} {propertyData.User.lastName}</p>
-                      <p>'Great Property!!'</p>
+                    <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
+                      <img className={styles.avatar} src={`http://68.183.183.118:4088/img/users/${propertyData.User.photo}`} alt='avatar'></img> 
+                      <div>
+                        <p>Listed by {propertyData.User.firstName} {propertyData.User.lastName}</p>
+                        <p>'Great Property!!'</p>
+                      </div>
                     </div>
                     {/* //* stopPropagation used to prevent parent parent div onClick from being triggered */}
                     <div className={styles.whatsappButton} onClick={(e)=>{
