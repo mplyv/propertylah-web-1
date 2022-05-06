@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { saveAuth, clearAuth } from "../../store/auth-thunks";
 
-// import AuthContext from "../../store/auth-context";
+// MUI
+import CircularProgress from "@mui/material/CircularProgress";
+import Alert from "@mui/material/Alert";
+import { Button, TextField } from "@mui/material";
+
 import Container from "../UI/Container";
 import classes from "./Login.module.css";
-import { authActions } from "../../store/auth-slice";
-
-const API_URL = "http://68.183.183.118:4088/api/v1/users/login";
+import { useLoginMutation } from "../../services/auth-service";
 
 const defaultInputs = {
   email: "",
@@ -14,11 +17,9 @@ const defaultInputs = {
 };
 
 const Login = () => {
-  // const [loginErr, setLoginErr] = useState(null);
-
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-
+  const [login, { isLoading, isError, error }] = useLoginMutation();
   const [formInputs, setFormInputs] = useState(defaultInputs);
 
   const inputChangeHandler = (e) => {
@@ -29,53 +30,35 @@ const Login = () => {
     });
   };
 
-  // temp for testing
   const logoutHandler = () => {
     console.log("logging out");
-    dispatch(authActions.logout());
+    dispatch(clearAuth());
   };
 
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    // TODO: validate inputs
-
+    // TODO: validation here
     try {
-      const res = await fetch(API_URL, {
-        method: "POST",
-        body: JSON.stringify({
-          email: formInputs.email,
-          password: formInputs.password,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const data = await res.json();
-      // update state
-      if (data.status === "success") {
-        console.log(data);
-
-        const { id, role, firstName, token } = data.data;
-        dispatch(authActions.login({ id, role, firstName, token }));
-      }
-
-      // data.status success,  data.token
-    } catch (err) {
-      console.log(err.message);
+      const user = await login(formInputs);
+      if (!user.error) dispatch(saveAuth(user.data.data));
+    } catch (error) {
+      // api call error - error connecting - pls check your network or try again later.
+      console.log("catch error", error);
     }
-
-    // clear inputs
-    // setFormInputs(defaultInputs);
   };
+
+  if (isLoading)
+    return (
+      <Container>
+        <CircularProgress />
+      </Container>
+    );
 
   if (auth.isAuthenticated)
     return (
       <Container>
         <h1>Welcome {auth.firstName}</h1>
-        <p>Role: {auth.role}</p>
-        <p>id: {auth.id}</p>
         <button type="submit" onClick={logoutHandler}>
           Logout
         </button>
@@ -87,26 +70,35 @@ const Login = () => {
         <div className={classes.login}>
           <h1>Login</h1>
           <form onSubmit={submitHandler}>
-            <label htmlFor="email">Email</label>
-            <input
+            <TextField
               id="email"
+              label="Email"
               name="email"
-              type="text"
+              variant="outlined"
               value={formInputs.email}
               onChange={inputChangeHandler}
+              size="small"
               required
-            ></input>
-            <label htmlFor="password">Password</label>
-            <input
+            />
+            <TextField
               id="password"
               name="password"
+              label="Password"
+              variant="outlined"
               type="password"
               value={formInputs.password}
               onChange={inputChangeHandler}
+              size="small"
               required
-            ></input>
-            <button type="submit">Login</button>
+            />
+
+            <Button variant="contained" type="submit">
+              Login
+            </Button>
           </form>
+          {isError && (
+            <Alert severity="error">Error: {error.data.message} </Alert>
+          )}
         </div>
       </Container>
     );
