@@ -130,9 +130,8 @@ const SpecificQuestion = () => {
     
 
 
-    { ( specificAnswers.length == 0 ) ? <div className={classes.loading}>Oops . . . No answers for this question yet. Answer this question and earn reputation points! 🤗</div> : (
+    { ( specificAnswers.length > 0 ) ? 
       specificAnswers.map((ans, i) => {
-
         return (
           <>
           <div className={classes["ans-container"]} key={i}>
@@ -172,7 +171,13 @@ const SpecificQuestion = () => {
           }
         </>
         ) 
-      })
+      }) : (
+        <>
+        <div className={classes.loading}>Oops . . . No answers for this question yet. Answer this question and earn reputation points! 🤗</div>
+        <div className={classes["no-answers"]}> 
+          <button className={classes["cta-btn"]}>Answer now</button>
+        </div>
+        </>
       )
     }
 
