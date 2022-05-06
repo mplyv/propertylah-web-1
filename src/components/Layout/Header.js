@@ -13,7 +13,6 @@ const Header = (props) => {
   const navigate = useNavigate();
 
   const logoutHandler = () => {
-    console.log("logging out");
     dispatch(clearAuth());
     navigate("/login");
   };
@@ -44,11 +43,11 @@ const Header = (props) => {
           <li>
             <NavLink to="/properties">Properties</NavLink>
           </li>
-          {isAuthenticated?
+          {isAuthenticated ? (
             <li>
               <NavLink to="/properties/agent/47">My Properties</NavLink>
             </li>
-          :null}
+          ) : null}
           <li>
             <NavLink to="/qna">Q & A</NavLink>
           </li>
