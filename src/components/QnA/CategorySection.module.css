@@ -1,8 +1,18 @@
+html, body {
+    overflow-x: hidden; 
+}
+
 .topics-container {
   max-width: 1200px;
   justify-content: center;
   align-items: center;
   margin: auto;
+}
+
+.header-section {
+  position: relative;
+  text-align: center;
+  margin-top: 50px;
 }
 
 .topics-section {
@@ -22,12 +32,16 @@
   background-color: #f1f1f1;
   box-shadow: 1px 1px 5px #33333330;
   border-radius: 10px;
+  border: 2px solid #f1f1f1;
   cursor: pointer;
+  transition: transform 300ms; 
+  transition: border 300ms;
 }
 
 .card:hover {
-  transform: scale(1.05);
+  transform: scale(1.01);
   opacity: 1;
+  border: 2px solid rgba(162, 54, 11);
 }
 
 .card-body {
@@ -42,16 +56,36 @@
   margin-bottom: 0.5rem;
 }
 
+.card-user {
+  display: flex;
+  color: #333;
+  font-weight: 700;
+}
+
 .card-desc-questions {
+  display: flex;
   color: #999;
   font-size: 15px;
   font-weight: 500;
   line-height: 1.4rem;
+  margin-top: 0.5rem;
 }
 
 .card-desc-persons {
   font-size: 14px;
   line-height: 1.4rem;
+}
+
+.trend-category {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #fff;
+  padding: 3px 8px;
+  background-color: #31995ccc;
+  border-radius: 7px;
+  margin-left: auto;
+
 }
 
 @media screen and (min-width: 600px) {

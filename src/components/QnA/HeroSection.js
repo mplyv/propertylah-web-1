@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./HeroSection.module.css";
 import "../../index.css";
 import { getQuestions } from "./API"
+
 import Modal from "./Modal";
 
-const HeroSection = ({ totalQuestions, setTotalQuestions, loading, setLoading, showModal, setShowModal }) => {
- 
+const HeroSection = ({ totalQuestions, setTotalQuestions, loading, setLoading, showModal, setShowModal, auth }) => {
+  const [ type, setType ] = useState(false)
+
   useEffect(() => {
     async function getTotalQuestions() {
       setLoading(true);
@@ -18,6 +20,7 @@ const HeroSection = ({ totalQuestions, setTotalQuestions, loading, setLoading, s
 
   const openModal = () => {
     setShowModal(true);
+    setType(true);
     console.log("Clicked")
   };
 
@@ -25,14 +28,15 @@ const HeroSection = ({ totalQuestions, setTotalQuestions, loading, setLoading, s
     <>
     <article className={classes["hero-container"]}>
       <div className={classes["hero-inner"]}>
+        { auth.isAuthenticated? <p>Howdy, {auth.firstName}!</p> : <></> }
         <h1>AskGuru Community</h1>
         { loading ? (
           <div>loading . . .</div>
         ) : ( totalQuestions?.length && ( 
-          <h2 className={classes.counter}><p className={classes.num}>{totalQuestions.length}</p> questions and counting 😎</h2>
+          <h2 className={classes.counter}><p className={classes.num}>{totalQuestions.length}</p> questions and counting 🚀</h2>
         ))}
         <p>Get answers from PropertyGuru experts in 24 hours </p>
-        <button className={classes["hero-btn"]} onClick={openModal}>Ask Question Now</button>
+        <button className={classes["hero-btn"]} onClick={openModal} type={type} setType={setType}>Ask Question Now</button>
         { showModal ? <Modal setShowModal={setShowModal} /> : null }
       </div>
     </article>
