@@ -17,7 +17,6 @@ const AnswerForm = (props) => {
         firstName: (fillAnsFields ? fillAnsFields.firstName : ""),
         lastName: (fillAnsFields ? fillAnsFields.lastName : ""),
         email: (fillAnsFields ? fillAnsFields.email : ""),
-        // questionId: (fillAnsFields ? fillAnsFields.questionId : "")
     });
 
     const { id } = useParams();
@@ -62,11 +61,11 @@ const AnswerForm = (props) => {
     const handleUpdate = async (e) => {
         e.preventDefault();
         setValues({ ...values , [e.target.name] : e.target.value })
-    
+        console.log(fillAnsFields.id)
         try {
             let mounted = true;
-            const res = await API.patch(`/answers/${id}`, {
-              "id" : parseInt(id),
+            const res = await API.patch(`/answers/${fillAnsFields.id}`, {
+              "id" : fillAnsFields.id,
               "answer" : values.answer,
               "category" : values.category,
               "firstName" : values.firstName,
@@ -85,24 +84,22 @@ const AnswerForm = (props) => {
       
     }
 
-
-
-
-    const handleSubmit = async (e) => {  
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setValues({ ...values, [e.target.name]: e.target.value })
         try {
             let mounted = true;
             const res = await API.post(`/answers/`, {
-                "answer": values.answer,
-                "category": values.category,
-                "firstName": values.firstName,
-                "lastName": values.lastName,
-                "email": values.email,
-                "questionId": id
+                "answer" : values.answer,
+                "category" : values.category,
+                "firstName" : values.firstName,
+                "lastName" : values.lastName,
+                "email" : values.email,
+                "questionId" : id
             })
-
+            
             if (res.status === 200) {
+                
                 console.log(`You have posted an answer: ${JSON.stringify(res.data)}`)
             } else {
                 throw new Error("Oops, something went wrong. Please try again.");
@@ -111,9 +108,9 @@ const AnswerForm = (props) => {
         } catch (err) {
             console.log("POST error", err.message);
         }
+        getSpecificAnswers();
     }
     
-    console.log(values);
     return (
         <div>
             <div className="form-intro">
@@ -141,6 +138,7 @@ const AnswerForm = (props) => {
               errorMessage="Please select a suitable category for your question"
               required={true}
               options={Object.keys(categoryOptions)}
+              defaultValue={fillAnsFields.category}
             />
             <FormInput 
               label="First Name" 

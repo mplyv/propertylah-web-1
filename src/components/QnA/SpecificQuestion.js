@@ -6,6 +6,7 @@ import API from "./API";
 
 import Container from "../UI/Container";
 import QuestionForm from "./QuestionForm";
+import Modal from "./Modal";
 import { slideToggle } from "../UI/SlideToggle";
 import { timeSince } from "../UI/TimeSince";
 
@@ -15,24 +16,30 @@ import AnswerForm from "./AnswerForm/AnswerForm";
 const SpecificQuestion = () => {
   const [ specificQuestion, setSpecificQuestion ] = useState([]);
   const [ specificAnswers, setSpecificAnswers ] = useState([]);
+
   const [ fillQnFields, setFillQnFields ] = useState({});
   const [ fillAnsFields, setFillAnsFields ] = useState({});
   const [ show, setShow ] = useState(false);
+  const [ showEditAns, setShowEditAns ] = useState(false);
+  const [ showReplyAns, setShowReplyAns ] = useState(false);
   const [ selected, setSelected ] = useState(null);
+  const [ showModal, setShowModal ] = useState(false);
+  const [ type, setType ] = useState(true);
+
   // using useRef hook
   const editQn = useRef(null);
   const ansQn = useRef(null);
 
   // toggle edit btn in specific ans
-  const toggleEdit = (i) => {
+  const toggleEditAns = (i) => {
     setSelected(i);
-    setShow(!show);
+    setShowEditAns(!showEditAns);
   }
 
-  // toggle edit btn in specific ans
-  const toggleReplyQn = (i) => {
+  // toggle reply btn in specific ans
+  const toggleReplyAns = (i) => {
     setSelected(i);
-    setShow(!show);
+    setShowReplyAns(!showReplyAns);
   }
 
   // get functions with useForm() hook
@@ -75,7 +82,7 @@ const SpecificQuestion = () => {
   }, [getSpecificQuestion]);
 
 
-  const getSpecificAnswers = useCallback( async () => {
+  const getSpecificAnswers = React.useCallback( async () => {
     try {
       const res = await API.get(`/questions/${id}/answers`)
       const arr = res.data.data;
@@ -119,26 +126,46 @@ const SpecificQuestion = () => {
   }, [])
 
   useEffect(() => {
-    function fillAnsForm() {
-      setFillAnsFields({ 
-        answer : specificAnswers.answer,
-        category : specificAnswers.category,
-        firstName: specificAnswers.firstName,
-        lastName: specificAnswers.lastName,
-        email: specificAnswers.email,
+    // function fillAnsForm() {
+    //   setFillAnsFields({ 
+    //     answer : specificAnswers.answer,
+    //     category : specificAnswers.category,
+    //     firstName: specificAnswers.firstName,
+    //     lastName: specificAnswers.lastName,
+    //     email: specificAnswers.email,
+    //   })
+    // }
+
+    const fillAnsForm = () => {
+      specificAnswers.map((ans, i) => {
+        setFillAnsFields({ 
+          id : ans.id,
+          answer : ans.answer,
+          category : ans.category,
+          firstName: ans.firstName,
+          lastName: ans.lastName,
+          email: ans.email,
+        })
       })
     }
     fillAnsForm()
   }, [specificAnswers])
 
+  
   useEffect(() => {
     reset(fillAnsFields);
   }, [])
 
-  const history = useNavigate();
   console.log(specificAnswers)
   console.log(fillQnFields);
   console.log(fillAnsFields);
+
+  const openModal = () => {
+    setShowModal(true);
+    setType(false)
+    console.log("Clicked")
+  };
+
   return (
     <Container>
     <div className={classes.container}>
@@ -215,41 +242,60 @@ const SpecificQuestion = () => {
               <div className={classes.category}>
                 Updated {timeSince(new Date(ans.updatedAt))} ago
               </div>
+              <div className={classes["questionId-section"]}>
+                <div className={classes.questionId}>
+                  Answer #{ans.id}
+                </div>
+              </div>
             </div>
             <div key={ans.id} className={classes["name-section"]}>
               <p className={classes.name}>
                 {ans.firstName} {ans.lastName}
               </p>
               <div className={classes.meta}> 
-                Replied on {new Date(specificQuestion.createdAt).toDateString()}
+                Replied on {new Date(ans.createdAt).toDateString()}
               </div>
             </div>
             <div className={classes.question}>
               {ans.answer}
             </div>
             <div className={classes["edit-reply"]}>
-              <div className={classes["edit-btn"]} onClick={() => [toggleEdit(i), setShow(!show)]}>Edit</div>
-              <div className={classes["reply-btn"]}>Reply </div>
+              <div className={classes["edit-btn"]} onClick={() => [toggleEditAns(i), setShowEditAns(!showEditAns)]}>Edit</div>
+              <div className={classes["reply-btn"]} onClick={() => [toggleReplyAns(i), setShowReplyAns(!showReplyAns)]}>Reply </div>
             </div>
           </div>
 
-          { selected === i && !show ? 
+          { selected === i && showEditAns ? 
             <div className={classes["ans-container"]}>
             <div className={classes["edit-reply"]}>
-              <div className={classes["edit-btn"]} onClick={() => setShow(!show)}>Close</div>
+              <div className={classes["edit-btn"]} onClick={() => setShowEditAns(!showEditAns)}>Close</div>
             </div>
-            <AnswerForm title={`Editing ${ans.firstName}'s answer`} fillAnsFields={fillAnsFields} setFillAnsFields={setFillAnsFields} key={id} specificAnswers={specificAnswers} getSpecificAnswers={getSpecificAnswers} />
+            <AnswerForm title={`Editing ${ans.firstName}'s answer (#${ans.id})`} fillAnsFields={fillAnsFields} setFillAnsFields={setFillAnsFields} key={id} specificAnswers={specificAnswers} getSpecificAnswers={getSpecificAnswers} />
             </div> 
-          : null
+            : null
           }
+
+          { selected === i && showReplyAns ? 
+            <div className={classes["ans-container"]}>
+            <div className={classes["edit-reply"]}>
+              <div className={classes["edit-btn"]} onClick={() => setShowReplyAns(!showReplyAns)}>Close</div>
+            </div>
+            <AnswerForm title={`Replying to ${ans.firstName}'s answer`} key={id} specificAnswers={specificAnswers} getSpecificAnswers={getSpecificAnswers} />
+            </div> 
+            : null
+          }
+
           </div>
-        ) 
-      }) : (
+        )
+      }).slice().sort((a, b) => a.updatedAt > b.updatedAt ? 1 : -1 )
+      
+      : (
         <>
         <div className={classes.loading}>Oops . . . No answers for this question yet. Answer this question and earn reputation points! 🤗</div>
         <div className={classes["no-answers"]}> 
-          <button className={classes["cta-btn"]}>Answer now</button>
+          <button className={classes["cta-btn"]} onClick={openModal} type={type} setType={setType}>Answer now</button>
         </div>
+        { showModal ? <Modal setShowModal={setShowModal} /> : null }
         </>
       )
     }

@@ -1,53 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "../../index.css";
-import classes from "./CategoryQuestions.module.css";
-import { getQuestions } from "./API"
+import classes from "./UserQuestions.module.css";
 import API from "./API";
 
 import Container from "../UI/Container";
-import Card from "../UI/Card";
-import SearchBar from "./SearchBar/SearchBar";
 import { timeSince } from "../UI/TimeSince";
 
-const CategoryQuestions = (props) => {
+
+const UserQuestions = () => {
   const [ loading, setLoading ] = useState(false);
-  const [ categoryQuestions, setCategoryQuestions ] = useState([]);
+  const [ userQuestions, setUserQuestions ] = useState([]);
 
-  const { categoryId } = useParams();
+  const { firstName } = useParams();
 
-  // format categoryId in params
-  const categoryIdMatch = categoryId.match(/[A-Z]+(?![a-z])|[A-Z]?[a-z]+|\d+/g).join(' ')
+  const firstNameMatch = firstName.match(/[A-Z]+(?![a-z])|[A-Z]?[a-z]+|\d+/g).join(' ')
 
-  useEffect (() => {
-    async function getCategoryQuestions() {
+  useEffect(() => {
+    async function getUserQuestions() {
       setLoading(true);
-      const res = await API.get(`/questions/?category[eq]=${categoryIdMatch}`)
-      // const res = await API.get(`/questions`, {
-      //   params : {
-      //     [category[eq]]: categoryId
-      //   }
-      // })
+      const res = await API.get(`/questions/?firstName[eq]=${firstNameMatch}`)
       const arr = res.data.data;
-      setCategoryQuestions(arr);
+      setUserQuestions(arr);
       setLoading(false);
     }
-    getCategoryQuestions()
+    getUserQuestions();
   }, []);
 
-  console.log(categoryQuestions)
-
-
-
+  console.log(userQuestions);
 
   return (
     <Container>
-      <Card><h1>Hello { categoryId }</h1></Card>
-      <SearchBar placeholder='Search a Question'/>
       { loading ? <div className={classes.loading}>Loading . . .</div> : (
-        categoryQuestions.map((qn) => {
+        userQuestions.map((qn) => {
           return (
-          <Link to={`/qna/${categoryId}/${qn.id}`} key={qn.id}>
+          <Link to={`/qna/${qn.category.split(" ").join("")}/${qn.id}`} key={qn.id}>
           <div className={classes.container}>
             <div key={qn.id} className={classes["name-section"]}>
               <p className={classes.name}>
@@ -74,13 +61,10 @@ const CategoryQuestions = (props) => {
           
         )}).slice().sort((a, b) => b.updatedAt > a.updatedAt ? 1 : -1)
       )}
-      
-      <Card><h1>Hello { categoryId }</h1></Card>
-      <button>Hello</button>
-    </Container>
-    
-  )
-  
-}
 
-export default CategoryQuestions;
+
+    </Container>
+  );
+};
+
+export default UserQuestions;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Routes, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import classes from "./CategorySection.module.css";
 import "../../index.css";
 import { getQuestions } from "./API";
@@ -27,6 +27,7 @@ const CategorySection = ({ questions, setQuestions, totalQuestions }) => {
     results[category] = ( results[category] || 0 ) + 1
   }
   console.log(results)
+
   // groupBy function (for counting questions and counting users)
   function groupBy( a, fn ) {
     const groups = {};
@@ -39,7 +40,6 @@ const CategorySection = ({ questions, setQuestions, totalQuestions }) => {
     })
     return groups;
   }
-
   // this counts number of questions each unique user has posted
   const byName = groupBy(questions.filter(e => e.category), e => e["firstName"])
 
@@ -52,6 +52,21 @@ const CategorySection = ({ questions, setQuestions, totalQuestions }) => {
   })
 
   console.log(outputQuestions)
+
+  // this creates a new array of top-ranking users
+  const rankUsers = ( outputQuestions, n ) => {
+    if (n > outputQuestions.length) {
+      return false;
+    }
+    return outputQuestions
+    .slice()
+    .sort((a, b) => {
+      return b.numOfQuestions - a.numOfQuestions
+    })
+    .slice(0, 8)
+  }
+  const topUsers = rankUsers(outputQuestions, 8);
+  console.log(topUsers);
 
   // this counts number of unique users in each category
   const byCat = groupBy(questions.filter(e => e.firstName), e => e["category"])
@@ -68,34 +83,64 @@ const CategorySection = ({ questions, setQuestions, totalQuestions }) => {
 
   return (
     <>
+    <h2 className={classes["header-section"]}>Question categories</h2>
     <div className={classes["topics-container"]}>
     { !!results && (
-    <div className={classes["topics-section"]}>
-    { Object.keys(results).map((el, id) => {
-      const getNumOfUsers = outputUsers[id];
-      return (
-        // <Link to={el} key={id}>
-        <Link to={el.split(" ").join("")} key={id}>
-        <div className={classes.card}>
-          <div className={classes["card-body"]}>
-            <div className={classes["card-category"]}>{el}</div>
-            <div className={classes["card-desc-questions"]}>
-              { results[el] == 1 ? ( <p>{results[el]} question</p> ) : ( <p>{results[el]} questions</p> )}
+      <div className={classes["topics-section"]}>
+      { Object.keys(results).map((el, id) => {
+        const getNumOfUsers = outputUsers[id];
+        return (
+          // <Link to={el} key={id}>
+          <Link to={el.split(" ").join("")} key={id}>
+          <div className={classes.card}>
+            <div className={classes["card-body"]}>
+              <div className={classes["card-category"]}>{el}</div>
+              <div className={classes["card-desc-questions"]}>
+                { results[el] == 1 ? ( <p>{results[el]} question</p> ) : ( <p>{results[el]} questions</p> )}
+              </div>
+              { getNumOfUsers.numOfUsers == 1 ? (
+                <div className={classes["card-desc-persons"]}>{getNumOfUsers.numOfUsers} person is looking for advice</div> 
+              ) : (
+                <div className={classes["card-desc-persons"]}>{getNumOfUsers.numOfUsers} people are looking for answers</div>
+              )
+              } 
             </div>
-            { getNumOfUsers.numOfUsers == 1 ? (
-              <div className={classes["card-desc-persons"]}>{getNumOfUsers.numOfUsers} person is looking for advice</div> 
-            ) : (
-              <div className={classes["card-desc-persons"]}>{getNumOfUsers.numOfUsers} people are looking for answers</div>
-            )
-            } 
           </div>
-        </div>
-        </Link>
-      )
-    }
+          </Link>
+        )
+      }
+      )}
+
+      </div>
     )}
 
-    </div>
+    { !!topUsers && (
+      <>
+      <h2 className={classes["header-section"]}>Browse by users</h2>
+      <div className={classes["topics-section"]}>
+        { topUsers.map((el, id) => {
+          return (
+            <Link to={`questions/${el.firstName.split(" ").join("")}`} key={id}>
+            <div className={classes.card}>
+              <div className={classes["card-body"]}>
+                  <div className={classes["card-user"]}>
+                    {el.firstName}
+                    <div className={classes["trend-category"]}>
+                      Rank: {id + 1}
+                    </div>
+                  </div>
+                  <div className={classes["card-desc-questions"]}>
+                    <div>{el.numOfQuestions}</div> 
+                    <div>&nbsp;questions asked</div>
+                  </div>
+              </div>
+            </div>
+            </Link>
+          )
+        })
+        }
+      </div>
+      </>
     )}
         
     </div>
