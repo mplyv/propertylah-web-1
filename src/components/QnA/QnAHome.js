@@ -7,6 +7,7 @@ import Container from "../UI/Container";
 import Card from "../UI/Card";
 import HeroSection from "./HeroSection";
 import CategorySection from "./CategorySection";
+import SecondarySection from "./SecondarySection";
 import CategoryQuestions from "./CategoryQuestions";
 import SearchBar from "./SearchBar/SearchBar";
 
@@ -34,6 +35,7 @@ const QnAHome = () => {
       setQuestions={setQuestions}       
       totalQuestions={totalQuestions} 
       />
+    <SecondarySection />
     </>
   );
 };
