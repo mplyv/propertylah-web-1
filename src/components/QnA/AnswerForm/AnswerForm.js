@@ -73,6 +73,7 @@ const AnswerForm = (props) => {
               "email" : values.email
             })
             if ( res.status === 200 ) {
+              getSpecificAnswers();
               console.log(`You have updated an answer: ${JSON.stringify(res)}`)
             } else {
               throw new Error("Oops, something went wrong. Please try again.");
@@ -99,7 +100,7 @@ const AnswerForm = (props) => {
             })
             
             if (res.status === 200) {
-                
+                // getSpecificAnswers();
                 console.log(`You have posted an answer: ${JSON.stringify(res.data)}`)
             } else {
                 throw new Error("Oops, something went wrong. Please try again.");
@@ -108,14 +109,13 @@ const AnswerForm = (props) => {
         } catch (err) {
             console.log("POST error", err.message);
         }
-        getSpecificAnswers();
     }
     
     return (
         <div>
             <div className="form-intro">
             <h1>{ fillAnsFields ? props.title : props.title }</h1>
-        </div>
+            </div>
         { fillAnsFields ? (
 
             <form onSubmit={handleUpdate} key={values.id}>

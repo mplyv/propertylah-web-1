@@ -6,7 +6,6 @@ import { getQuestions } from "./API"
 import Modal from "./Modal";
 
 const HeroSection = ({ totalQuestions, setTotalQuestions, loading, setLoading, showModal, setShowModal, auth }) => {
-  const [ type, setType ] = useState(false)
 
   useEffect(() => {
     async function getTotalQuestions() {
@@ -20,8 +19,6 @@ const HeroSection = ({ totalQuestions, setTotalQuestions, loading, setLoading, s
 
   const openModal = () => {
     setShowModal(true);
-    setType(true);
-    console.log("Clicked")
   };
 
   return (
@@ -36,7 +33,7 @@ const HeroSection = ({ totalQuestions, setTotalQuestions, loading, setLoading, s
           <h2 className={classes.counter}><p className={classes.num}>{totalQuestions.length}</p> questions and counting 🚀</h2>
         ))}
         <p>Get answers from PropertyGuru experts in 24 hours </p>
-        <button className={classes["hero-btn"]} onClick={openModal} type={type} setType={setType}>Ask Question Now</button>
+        <button className={classes["hero-btn"]} onClick={openModal}>Ask Question Now</button>
         { showModal ? <Modal setShowModal={setShowModal} /> : null }
       </div>
     </article>

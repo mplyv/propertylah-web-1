@@ -10,6 +10,18 @@
   background-repeat: no-repeat;
 }
 
+.category-hero-container {
+  width: 100vw;
+  height: 65vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(#0003, #0003), url("../../assets/images/qna/qna-hero-6.jpg");
+  background-position: right;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .hero-inner {
   padding: 0 12rem;
 }
@@ -20,8 +32,22 @@
   text-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
 }
 
+.category-h1 {
+  font-size: 60px;
+  color: #fff;
+  text-align: left;
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+}
+
 .hero-inner > p {
   color: #333;
+  font-size: 24px;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.category-p {
+  color: #fff;
   font-size: 24px;
   text-align: left;
   margin-top: 20px;
@@ -75,9 +101,21 @@
     background-repeat: no-repeat;
   }
 
+  .category-hero-container {
+    width: 100vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(#0003, #0003), url("../../assets/images/qna/qna-hero-6-tablet.jpg");
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
   .hero-inner {
     padding: 0 3rem;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
   }
 
   .hero-inner > h1 {
@@ -103,9 +141,21 @@
     background-repeat: no-repeat;
   }
 
+  .category-hero-container {
+    width: 100vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(#0003, #0003), url("../../assets/images/qna/qna-hero-6-mobile.jpg");
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
   .hero-inner {
     padding: 0 1rem;
-    margin-bottom: 100px;
+    margin-bottom: 10px;
   }
 
   .hero-inner > h1 {
