@@ -1,7 +1,3 @@
-html, body {
-    overflow-x: hidden; 
-}
-
 .topics-container {
   max-width: 1200px;
   justify-content: center;
@@ -89,19 +85,18 @@ html, body {
 }
 
 @media screen and (min-width: 600px) {
+
   .topics-section {
     grid-template-columns: repeat(auto-fit, minmax(14rem, 16rem));
   }
-
 
   /* .topic-card {
     width: 90%;
   } */
 }
 
-
-/* @media screen and (max-width: 480px) {
-  .topics-section {
+@media screen and (max-width: 480px) {
+  /* .topics-section {
     grid-template-columns: 1fr 1fr;
-  }
-} */
+  } */
+}
