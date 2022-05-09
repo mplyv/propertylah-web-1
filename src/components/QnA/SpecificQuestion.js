@@ -162,7 +162,7 @@ const SpecificQuestion = () => {
 
   const openModal = () => {
     setShowModal(true);
-    setType(false)
+    setType(false);
     console.log("Clicked")
   };
 
