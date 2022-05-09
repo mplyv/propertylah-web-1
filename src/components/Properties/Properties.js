@@ -16,8 +16,8 @@ const Properties = ()=>{
         <Route path='/rent' element={<PropertyList path='Rent'/>}/>
         <Route path='/rent/:id' element={<SpecificProperty />}/>
         <Route path='/sale' element={<PropertyList path='Sale'/>}/>
-        {auth.isAuthenticated? <Route path='/agent/:sellerId' element={<PropertyList path='All'/>}/>: <Route path='/' element={<PropertyHome />}/>}
-        {auth.isAuthenticated? <Route path='/agent/:sellerId/:id' element={<SpecificProperty />}/>: <Route path='/' element={<PropertyHome />}/>}
+        {auth.isAuthenticated? <Route path='/agent/:sellerId' element={<PropertyList path='All'/>}/>: null}
+        {auth.isAuthenticated? <Route path='/agent/:sellerId/:id' element={<SpecificProperty />}/>: null}
     </Routes>
   )
 }
