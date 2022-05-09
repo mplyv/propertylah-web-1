@@ -1,6 +1,8 @@
 import React, { useRef } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import { useSelector } from "react-redux";
+
 import AnswerForm from "../AnswerForm/AnswerForm";
 
 const Modal = ({ setShowModal, props }) => {
@@ -12,6 +14,8 @@ const Modal = ({ setShowModal, props }) => {
     }
   }
 
+  const auth = useSelector((state) => state.auth);
+
   return (
     ReactDOM.createPortal(
       <div className="container" ref={modalRef} onClick={closeModal}>
@@ -22,7 +26,8 @@ const Modal = ({ setShowModal, props }) => {
 						</svg>
           </button>
           <h1>Answer question and earn reputation points!</h1>
-          <AnswerForm />
+          { auth.isAuthenticated ? <AnswerForm /> : <div>You must be logged in to post an answer.</div>
+          }
         </div>
       </div>,
       document.body
