@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import classes from "./SpecificQuestions.module.css";
 import API from "./API";
 
 import Container from "../UI/Container";
 import QuestionForm from "./QuestionForm";
-import Modal from "./Modal";
+import AnsModal from "./AnsModal";
 import { slideToggle } from "../UI/SlideToggle";
 import { timeSince } from "../UI/TimeSince";
 
@@ -46,6 +47,7 @@ const SpecificQuestion = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const { categoryId, id } = useParams();
+  const auth = useSelector((state) => state.auth);
 
   // useEffect (() => {
   //   const getSpecificQuestion = async () => {
@@ -126,16 +128,6 @@ const SpecificQuestion = () => {
   }, [])
 
   useEffect(() => {
-    // function fillAnsForm() {
-    //   setFillAnsFields({ 
-    //     answer : specificAnswers.answer,
-    //     category : specificAnswers.category,
-    //     firstName: specificAnswers.firstName,
-    //     lastName: specificAnswers.lastName,
-    //     email: specificAnswers.email,
-    //   })
-    // }
-
     const fillAnsForm = () => {
       specificAnswers.map((ans, i) => {
         setFillAnsFields({ 
@@ -162,17 +154,17 @@ const SpecificQuestion = () => {
 
   const openModal = () => {
     setShowModal(true);
-    setType(false);
-    console.log("Clicked")
   };
 
   return (
     <Container>
     <div className={classes.container}>
       <div className={classes["tags-section"]}>
+        <Link to={`/qna/${categoryId}`}>
         <div className={classes.category}>
           {specificQuestion.category}
         </div>
+        </Link>
         <div className={classes.category}>
           Updated {timeSince(new Date(specificQuestion.updatedAt))} ago
         </div>
@@ -208,26 +200,47 @@ const SpecificQuestion = () => {
       </div>
     </div>
 
-    { editQn &&
-      (
+    { editQn && auth.isAuthenticated ?
+      ( auth.firstName === specificQuestion.firstName ?
         <div ref={editQn} className={classes["edit-qn-container"]}>
           <div className={classes["edit-reply"]}>
             <div className={classes["edit-btn"]} onClick={() => slideToggle(editQn.current)}>Close</div>
           </div>
           <QuestionForm title="Edit Question" desc={`Hello ${specificQuestion.firstName}, You can update this question (ID:${specificQuestion.id}) anytime 😊`} fillQnFields={fillQnFields} setFillQnFields={setFillQnFields} key={id} getSpecificQuestion={getSpecificQuestion} />
-        </div> 
-      )
+        </div> :
+
+        <div ref={editQn} className={classes["edit-qn-container"]}>
+        <div className={classes["edit-reply"]}>
+          <div className={classes["edit-btn"]} onClick={() => slideToggle(ansQn.current)}>Close</div>
+        </div>
+        <div className={classes["edit-reply"]}>Sorry, you can't edit someone else's question.</div>
+        </div>
+      ) : 
+      
+      <div ref={editQn} className={classes["edit-qn-container"]}>
+        <div className={classes["edit-reply"]}>
+          <div className={classes["edit-btn"]} onClick={() => slideToggle(ansQn.current)}>Close</div>
+        </div>
+        <div className={classes["edit-reply"]}>You must be logged in to edit your question.</div>
+      </div>
     }
 
-    { ansQn && 
-      (
+    { ansQn &&
+      ( auth.isAuthenticated ?
         <div ref={ansQn} className={classes["edit-qn-container"]}>
           <div className={classes["edit-reply"]}>
             <div className={classes["edit-btn"]} onClick={() => slideToggle(ansQn.current)}>Close</div>
           </div>
-          <AnswerForm title={`Reply to ${specificQuestion.firstName}`} key={id} />
-        </div> 
-      )
+          <AnswerForm title={`Reply to ${specificQuestion.firstName}`} key={id} getSpecificAnswers={getSpecificAnswers} />
+        </div> : 
+
+        <div ref={ansQn} className={classes["edit-qn-container"]}>
+        <div className={classes["edit-reply"]}>
+          <div className={classes["edit-btn"]} onClick={() => slideToggle(ansQn.current)}>Close</div>
+        </div>
+        <div className={classes["edit-reply"]}>You must be logged in to post an answer.</div>
+        </div>
+      ) 
     }
 
     { ( specificAnswers.length > 0 ) ? 
@@ -236,9 +249,11 @@ const SpecificQuestion = () => {
           <div key={i}>
           <div className={classes["ans-container"]}>
             <div className={classes["tags-section"]}>
+              <Link to={`/qna/${categoryId}`}>
               <div className={classes.category}>
                 {ans.category}
               </div>
+              </Link>
               <div className={classes.category}>
                 Updated {timeSince(new Date(ans.updatedAt))} ago
               </div>
@@ -275,16 +290,24 @@ const SpecificQuestion = () => {
             : null
           }
 
-          { selected === i && showReplyAns ? 
-            <div className={classes["ans-container"]}>
-            <div className={classes["edit-reply"]}>
-              <div className={classes["edit-btn"]} onClick={() => setShowReplyAns(!showReplyAns)}>Close</div>
-            </div>
-            <AnswerForm title={`Replying to ${ans.firstName}'s answer`} key={id} specificAnswers={specificAnswers} getSpecificAnswers={getSpecificAnswers} />
-            </div> 
-            : null
+          
+          { selected === i && showReplyAns ?
+            ( auth.isAuthenticated ? 
+              <div className={classes["ans-container"]}>
+              <div className={classes["edit-reply"]}>
+                <div className={classes["edit-btn"]} onClick={() => setShowReplyAns(!showReplyAns)}>Close</div>
+              </div>
+              <AnswerForm title={`Replying to ${ans.firstName}'s answer`} key={id} specificAnswers={specificAnswers} getSpecificAnswers={getSpecificAnswers} />
+              </div> 
+              : 
+              <div className={classes["ans-container"]}>
+              <div className={classes["edit-reply"]}>
+                <div className={classes["edit-btn"]} onClick={() => setShowReplyAns(!showReplyAns)}>Close</div>
+              </div>
+              <div>You must be logged in to post an answer.</div>
+              </div>
+            ) : null
           }
-
           </div>
         )
       }).slice().sort((a, b) => a.updatedAt > b.updatedAt ? 1 : -1 )
@@ -295,18 +318,10 @@ const SpecificQuestion = () => {
         <div className={classes["no-answers"]}> 
           <button className={classes["cta-btn"]} onClick={openModal} type={type} setType={setType}>Answer now</button>
         </div>
-        { showModal ? <Modal setShowModal={setShowModal} /> : null }
+        { showModal ? <AnsModal setShowModal={setShowModal} /> : null }
         </>
       )
     }
-
-    {/* <div ref={editAns} className={classes["edit-container"]}>
-      <div className={classes["edit-reply"]}>
-        <div className={classes["edit-btn"]} onClick={() => slideToggle(editAns.current)}>Close</div>
-      </div>
-      <QuestionForm title="Edit Question" desc={`Hello ${specificQuestion.firstName}, You can update this question (ID:${specificQuestion.id}) anytime 😊`} fillQnFields={fillQnFields} setFillQnFields={setFillQnFields} key={id} />
-    </div>  */}
-    {/* <AnswerForm title="Answer Question" desc={`Hello ${specificQuestion.firstName}, You can update this answer (ID:${specificQuestion.id}) anytime 😊`} fillAnsFields={fillAnsFields} setFillAnsFields={setFillAnsFields} key={id} /> */}
     </Container>
   );
 };

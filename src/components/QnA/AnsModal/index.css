@@ -1,0 +1,68 @@
+body .container {
+  z-index: 3;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.container .modal {
+  z-index: 1;
+  width: 75vw;
+  height: 75vh;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  position: relative;
+  animation: animate 0.3s;
+}
+
+.close-btn {
+  position: absolute;
+  background-color: transparent;
+  top: 7px;
+  right: 7px;
+  padding: 5px 5px;
+  border-radius: 10px;
+}
+
+.close-btn:hover {
+  color: #f1f1f1;
+  background-color: #f1f1f1;
+  transition: all 0.3s ease-out;
+  transition: 300ms;
+}
+
+.svg-icon {
+  width: 2em;
+  height: 2em;
+}
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+  fill: rgb(0, 0, 0);
+}
+
+.svg-icon circle {
+  stroke: rgb(0, 0, 0);
+  stroke-width: 5;
+}
+
+@keyframes animate {
+  from {
+    transform: scale(0.5);
+  }
+  to {
+    transform: scale(1);
+  }
+}
