@@ -21,6 +21,6 @@ const authApi = baseApi.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useLoginMutation, useSignupMutation } = authApi;
+export const { useLoginMutation, useSignupMutation, useGetMeQuery } = authApi;
 
 export default authApi;

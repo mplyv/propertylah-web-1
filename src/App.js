@@ -7,21 +7,20 @@ import Footer from "./components/Layout/Footer";
 import Home from "./components/Home/Home";
 import Properties from "./components/Properties/Properties";
 import Articles from "./components/Articles/Articles";
-// import SignUp from "./components/Users/SignUp";
-// import Login from "./components/Users/Login";
 import QnA from "./components/QnA/QnA";
 import Sample from "./components/Sample/Sample";
 import Profile from "./components/Users/Profile";
-
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
+import FavoriteProperties from "./components/Users/FavoriteProperties";
+
 import { fetchAuth } from "./store/auth-thunks";
 
 function App() {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  // load auth from localStoarge on App load
+  // load auth from localStorage on App load
   useEffect(() => {
     dispatch(fetchAuth());
   }, [dispatch]);
@@ -32,8 +31,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         {!isAuthenticated && <Route path="/signup" element={<Signup />} />}
-        <Route path="/login" element={<Login />} />
+        {!isAuthenticated && <Route path="/login" element={<Login />} />}
         {isAuthenticated && <Route path="/profile" element={<Profile />} />}
+        {!isAuthenticated && <Route path="/profile" element={<Login />} />}
+        {isAuthenticated && (
+          <Route path="/favorite-properties" element={<FavoriteProperties />} />
+        )}
         <Route path="/properties/*" element={<Properties />} />
         <Route path="/qna/*" element={<QnA />} />
         <Route path="/articles/*" element={<Articles />} />

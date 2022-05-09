@@ -6,6 +6,7 @@ import { useNavigate, NavLink } from "react-router-dom";
 // MUI
 import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -70,7 +71,12 @@ const Signup = () => {
         <h1>Sign up</h1>
         {isLoading && <CircularProgress />}
         {isError && (
-          <Alert severity="error">Error: {error.data.message} </Alert>
+          <Alert severity="error">
+            <AlertTitle>Error</AlertTitle>
+            {error.data?.message
+              ? error.data.message
+              : " Please check your connection or try again later."}
+          </Alert>
         )}
         <Box
           component="form"

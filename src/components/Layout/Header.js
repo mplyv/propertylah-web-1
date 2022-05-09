@@ -5,11 +5,15 @@ import classes from "./Header.module.css";
 import { useNavigate } from "react-router-dom";
 
 import { clearAuth } from "../../store/auth-thunks";
+
+// mui
+import Avatar from "@mui/material/Avatar";
 import { Button } from "@mui/material";
+
+import AccountMenu from "./AccountMenu";
 
 const Header = (props) => {
   const auth = useSelector((state) => state.auth);
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -26,7 +30,7 @@ const Header = (props) => {
 
       <div className={classes["main-nav"]}>
         <ul className={classes["main-nav-list"]}>
-          {!isAuthenticated && (
+          {!auth.isAuthenticated && (
             <>
               <li>
                 <NavLink to="/signup">Sign Up</NavLink>
@@ -36,17 +40,14 @@ const Header = (props) => {
               </li>
             </>
           )}
-          {isAuthenticated && (
-            <li>
-              <NavLink to="/profile">Profile</NavLink>
-            </li>
-          )}
           <li>
             <NavLink to="/properties">Properties</NavLink>
           </li>
-          {isAuthenticated ? (
+          {auth.isAuthenticated ? (
             <li>
-              <NavLink to={`/properties/agent/${auth.id}`}>My Properties</NavLink>
+              <NavLink to={`/properties/agent/${auth.id}`}>
+                My Properties
+              </NavLink>
             </li>
           ) : null}
           <li>
@@ -58,13 +59,8 @@ const Header = (props) => {
           <li>
             <NavLink to="/sample">Sample</NavLink>
           </li>
-          {isAuthenticated && (
-            <li>
-              <Button variant="contained" onClick={logoutHandler}>
-                Log Out
-              </Button>
-            </li>
-          )}
+
+          {auth.isAuthenticated && <AccountMenu />}
         </ul>
       </div>
     </header>

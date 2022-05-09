@@ -4,10 +4,12 @@ import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { baseApi } from "../services/baseApi";
 
 import authSlice from "./auth-slice";
+import favoritesSlice from "./favorites-slice";
 
 const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
+    favorites: favoritesSlice.reducer,
     [baseApi.reducerPath]: baseApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
