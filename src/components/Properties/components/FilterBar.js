@@ -31,10 +31,14 @@ const FilterBar = (props)=>{
         }
     }
     const clearFilterBar = ()=>{
+        let functions = [props.setMinPrice,props.setMaxPrice,props.setMinFloorsize,props.setMaxFloorsize,props.setMinPSF,props.setMaxPSF,props.setMinYear,props.setMaxYear];
+        for (let i=0;i<functions.length;i++){
+            functions[i]('');
+        }
         props.setPropertyType('All');
         props.setNoOfBedrooms('All');
-        props.setMinPrice('');
-        props.setMaxPrice('');
+        props.setNoOfBathrooms('All');
+        props.setTenure("All");
     }
     const clearPrice = ()=>{
         props.setMinPrice('');
@@ -45,10 +49,14 @@ const FilterBar = (props)=>{
         <div className={styles.filterSearchBar}>
             <input className={styles.searchBar} placeholder='Search' ></input>
             <PopupFilter 
-                setMinPrice={props.setMinPrice} setMaxPrice={props.setMaxPrice} 
-                setMinFloorsize={props.setMinFloorsize} setMaxFloorsize={props.setMaxFloorsize}
-                setMinPSF={props.setMinPSF} setMaxPSF={props.setMaxPSF}
-                setMinYear={props.setMinYear} setMaxYear={props.setMaxYear}
+                setMinPrice={props.setMinPrice} 
+                setMaxPrice={props.setMaxPrice} 
+                setMinFloorsize={props.setMinFloorsize} 
+                setMaxFloorsize={props.setMaxFloorsize}
+                setMinPSF={props.setMinPSF} 
+                setMaxPSF={props.setMaxPSF}
+                setMinYear={props.setMinYear} 
+                setMaxYear={props.setMaxYear}
                 setNoOfBathrooms = {props.setNoOfBathrooms}
                 setNoOfBedrooms = {props.setNoOfBedrooms}
                 setPropertyType = {props.setPropertyType}
