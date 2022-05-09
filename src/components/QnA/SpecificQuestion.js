@@ -8,6 +8,7 @@ import API from "./API";
 import Container from "../UI/Container";
 import QuestionForm from "./QuestionForm";
 import AnsModal from "./AnsModal";
+import Vote from "../UI/Vote";
 import { slideToggle } from "../UI/SlideToggle";
 import { timeSince } from "../UI/TimeSince";
 
@@ -248,6 +249,8 @@ const SpecificQuestion = () => {
         return (
           <div key={i}>
           <div className={classes["ans-container"]}>
+            <Vote />
+            <div className={classes["content-container"]}>
             <div className={classes["tags-section"]}>
               <Link to={`/qna/${categoryId}`}>
               <div className={classes.category}>
@@ -277,11 +280,13 @@ const SpecificQuestion = () => {
             <div className={classes["edit-reply"]}>
               <div className={classes["edit-btn"]} onClick={() => [toggleEditAns(i), setShowEditAns(!showEditAns)]}>Edit</div>
               <div className={classes["reply-btn"]} onClick={() => [toggleReplyAns(i), setShowReplyAns(!showReplyAns)]}>Reply </div>
+              
+            </div>
             </div>
           </div>
 
           { selected === i && showEditAns ? 
-            <div className={classes["ans-container"]}>
+            <div className={classes["content-container"]}>
             <div className={classes["edit-reply"]}>
               <div className={classes["edit-btn"]} onClick={() => setShowEditAns(!showEditAns)}>Close</div>
             </div>
@@ -293,14 +298,14 @@ const SpecificQuestion = () => {
           
           { selected === i && showReplyAns ?
             ( auth.isAuthenticated ? 
-              <div className={classes["ans-container"]}>
+              <div className={classes["content-container"]}>
               <div className={classes["edit-reply"]}>
                 <div className={classes["edit-btn"]} onClick={() => setShowReplyAns(!showReplyAns)}>Close</div>
               </div>
               <AnswerForm title={`Replying to ${ans.firstName}'s answer`} key={id} specificAnswers={specificAnswers} getSpecificAnswers={getSpecificAnswers} />
               </div> 
               : 
-              <div className={classes["ans-container"]}>
+              <div className={classes["content-container"]}>
               <div className={classes["edit-reply"]}>
                 <div className={classes["edit-btn"]} onClick={() => setShowReplyAns(!showReplyAns)}>Close</div>
               </div>

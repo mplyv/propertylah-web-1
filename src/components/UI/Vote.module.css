@@ -1,0 +1,19 @@
+.vote-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.count {
+  display: inline;
+}
+
+.vote-btn {
+  background-color: transparent;
+}
+
+.vote-btn:hover {
+  background-color: transparent;
+}

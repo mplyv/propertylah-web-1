@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Avatar } from "@mui/material";
 import "../../index.css";
 import classes from "./CategoryQuestions.module.css";
 import heroClasses from "./HeroSection.module.css";
+import sidebarImage1 from "../../assets/images/qna/askguru-question-banner.jpg";
+import sidebarImage2 from "../../assets/images/qna/askguru-banner.jpg";
 import API from "./API";
 
-import Card from "../UI/Card";
 import SearchBar from "./SearchBar/SearchBar";
-import HeroSection from "./HeroSection";
 import { timeSince } from "../UI/TimeSince";
 
 const CategoryQuestions = (props) => {
@@ -39,30 +40,30 @@ const CategoryQuestions = (props) => {
 
   console.log(categoryQuestions)
 
-
   return (
     <>
     <article className={heroClasses["category-hero-container"]}>
       <div className={heroClasses["hero-inner"]}>
-        { auth.isAuthenticated? <div className={heroClasses["category-p"]}>Welcome!</div> : <></> }
+        { auth.isAuthenticated? <div className={heroClasses["category-p"]}>Welcome, {auth.firstName}</div> : <></> }
         <h1 className={heroClasses["category-h1"]}>
           { categoryId.replace(/([A-Z]+)/g, ' $1').trim() }
         </h1>
         
-          { auth.isAuthenticated? <div className={heroClasses["category-p"]}>Hey {auth.firstName}, you can find all the { categoryId.replace(/([A-Z]+)/g, ' $1').trim() } questions here 😊</div> : <div className={heroClasses["category-p"]}>Welcome, we have all the questions you need. 😏</div>
+          { auth.isAuthenticated? <div className={heroClasses["category-p"]}>There are {categoryQuestions.length} questions in here. Enjoy! 😊</div> : <div className={heroClasses["category-p"]}>Welcome, we have all the questions you need. 😏</div>
           }        
       </div>
     </article>
 
-
+    <div className={classes.container}>
     <div className={classes["main-container"]}>
-      
       <SearchBar placeholder='Search a Question'/>
       { loading ? <div className={classes.loading}>Loading . . .</div> : (
-        categoryQuestions.map((qn) => {
+        
+        categoryQuestions.map((qn, i) => {
           return (
+          <>
           <Link to={`/qna/${categoryId}/${qn.id}`} key={qn.id}>
-          <div className={classes.container}>
+          <div className={classes["card-container"]}>
             <div key={qn.id} className={classes["name-section"]}>
               <p className={classes.name}>
                 {qn.firstName} {qn.lastName}
@@ -85,10 +86,18 @@ const CategoryQuestions = (props) => {
             </div>
               </div>
           </Link>
-          
+          </>
         )}).slice().sort((a, b) => b.updatedAt > a.updatedAt ? 1 : -1)
+        
       )}
       
+    </div>
+    <div className={classes.sidebar}>
+      {/* <div className={classes.sidebarContainer}> */}
+        <img className={classes["sidebar-image"]} src={sidebarImage1} alt="askguru-question-banner" />
+        <img className={classes["sidebar-image"]} src={sidebarImage2} alt="askguru-question-banner" />
+      </div>
+    {/* </div> */}
     </div>
     </>
   )
