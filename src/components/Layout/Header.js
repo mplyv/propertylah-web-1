@@ -1,26 +1,12 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Logo from "../../assets/images/propertylahlogo.png";
 import classes from "./Header.module.css";
-import { useNavigate } from "react-router-dom";
-
-import { clearAuth } from "../../store/auth-thunks";
-
-// mui
-import Avatar from "@mui/material/Avatar";
-import { Button } from "@mui/material";
 
 import AccountMenu from "./AccountMenu";
 
 const Header = (props) => {
   const auth = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const logoutHandler = () => {
-    dispatch(clearAuth());
-    navigate("/login");
-  };
 
   return (
     <header className={classes.header}>
