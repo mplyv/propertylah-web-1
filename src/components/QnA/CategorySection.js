@@ -125,6 +125,11 @@ const CategorySection = ({ questions, setQuestions, totalQuestions }) => {
               <div className={classes["card-body"]}>
                   <div className={classes["card-user"]}>
                     {el.firstName}
+                    { id === 0 && 
+                    <div className={classes["leading"]}>
+                      Popular
+                    </div>
+                    }
                     <div className={classes["trend-category"]}>
                       Rank: {id + 1}
                     </div>

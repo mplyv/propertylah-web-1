@@ -35,7 +35,7 @@ const UserQuestions = () => {
       <article className={heroClasses["user-questions-hero-container"]}>
       <div className={heroClasses["hero-inner"]}>
         <div className={heroClasses["category-p"]}>Here's all the questions by</div>
-        <div className={heroClasses["category-h2"]}>{ firstName.replace(/([A-Z]+)/g, ' $1').trim() }</div>
+        <div className={heroClasses["category-h2"]}>{ firstName.replace(/([A-Z]+)/g, ' $1').trim() } </div>
 
         <div className={classes["tags-section"]}>
         <Link to={`/qna/questions/${firstName}`}>

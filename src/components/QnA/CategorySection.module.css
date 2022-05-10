@@ -82,7 +82,17 @@
   background-color: #31995ccc;
   border-radius: 7px;
   margin-left: auto;
+}
 
+.leading {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #fff;
+  padding: 3px 8px;
+  background-color: #e03d3190;
+  border-radius: 7px;
+  margin-left: auto;
 }
 
 @media screen and (min-width: 600px) {
