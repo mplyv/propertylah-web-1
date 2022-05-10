@@ -1,0 +1,11 @@
+.articles-container {
+    width: 100vw;
+    height: 65vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(#0001, #0001), url("../../assets/images/articles/articles-linkto-qna.jpg");
+    background-position: right;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
