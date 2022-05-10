@@ -10,7 +10,7 @@ import { Button, TextField } from "@mui/material";
 import Container from "../UI/Container";
 import classes from "./Login.module.css";
 import { useLoginMutation } from "../../services/auth-service";
-
+import { fetchFavorites } from "../../store/favorites-thunks";
 const defaultInputs = {
   email: "",
   password: "",
@@ -41,7 +41,10 @@ const Login = () => {
     // TODO: validation here
     try {
       const user = await login(formInputs);
-      if (!user.error) dispatch(saveAuth(user.data.data));
+      if (!user.error) {
+        dispatch(saveAuth(user.data.data));
+        dispatch(fetchFavorites());
+      }
     } catch (error) {
       // api call error - error connecting - pls check your network or try again later.
       console.log("catch error", error);

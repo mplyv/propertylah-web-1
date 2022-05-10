@@ -49,7 +49,7 @@ const AccountMenu = () => {
           >
             {/* <Avatar sx={{ width: 32, height: 32 }}>M</Avatar> */}
             <Avatar
-              sx={{ width: 50, height: 50 }}
+              sx={{ width: 40, height: 40 }}
               alt={auth.firstName}
               src={`http://68.183.183.118:4088/img/users/${auth.photo}`}
             />
@@ -126,11 +126,15 @@ const AccountMenu = () => {
           </ListItemIcon>
           Bookmarked Questions
         </MenuItem>
-        <MenuItem>
+        <MenuItem
+          onClick={() => {
+            navigate("/credits");
+          }}
+        >
           <ListItemIcon>
             <MonetizationOnOutlinedIcon sx={{ width: 25, height: 25 }} />
           </ListItemIcon>
-          Purchase Credits
+          Credits
         </MenuItem>
         <MenuItem>
           <ListItemIcon>

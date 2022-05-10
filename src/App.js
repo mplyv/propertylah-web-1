@@ -13,8 +13,10 @@ import Profile from "./components/Users/Profile";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
 import FavoriteProperties from "./components/Users/FavoriteProperties";
+import Credits from "./components/Users/Credits";
 
 import { fetchAuth } from "./store/auth-thunks";
+import { fetchFavorites } from "./store/favorites-thunks";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +25,7 @@ function App() {
   // load auth from localStorage on App load
   useEffect(() => {
     dispatch(fetchAuth());
+    dispatch(fetchFavorites());
   }, [dispatch]);
 
   return (
@@ -33,6 +36,7 @@ function App() {
         {!isAuthenticated && <Route path="/signup" element={<Signup />} />}
         {!isAuthenticated && <Route path="/login" element={<Login />} />}
         {isAuthenticated && <Route path="/profile" element={<Profile />} />}
+        {isAuthenticated && <Route path="/credits" element={<Credits />} />}
         {!isAuthenticated && <Route path="/profile" element={<Login />} />}
         {isAuthenticated && (
           <Route path="/favorite-properties" element={<FavoriteProperties />} />

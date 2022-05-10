@@ -9,14 +9,16 @@ const favoritesSlice = createSlice({
   initialState: initialFavoritesState,
   reducers: {
     addToFavorites(state, { payload }) {
-      // add to array
-      const { id } = payload;
-      state.favIds.push(id);
+      if (state.favIds.includes(payload)) return;
+      state.favIds.push(payload);
     },
     removeFromFavorites(state, { payload }) {
-      // remove from array
-      const { id } = payload;
-      state.favIds.push(id);
+      if (!state.favIds.includes(payload)) return;
+      state.favIds = state.favIds.filter((favId) => favId !== payload);
+    },
+    // for use with thunks
+    saveFavorites(state, { payload }) {
+      state.favIds = [...payload];
     },
   },
 });
