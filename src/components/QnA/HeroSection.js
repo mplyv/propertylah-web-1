@@ -32,7 +32,7 @@ const HeroSection = ({ totalQuestions, setTotalQuestions, loading, setLoading, s
         ) : ( totalQuestions?.length && ( 
           <h2 className={classes.counter}><p className={classes.num}>{totalQuestions.length}</p> questions and counting 🚀</h2>
         ))}
-        <p>Get answers from PropertyGuru experts in 24 hours </p>
+        <p>Get answers from the PropertyLah community in 24 hours! </p>
         <button className={classes["hero-btn"]} onClick={openModal}>Ask Question Now</button>
         { showModal ? <Modal setShowModal={setShowModal} /> : null }
       </div>
