@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "../../index.css";
 import classes from "./UserQuestions.module.css";
+import heroClasses from "./HeroSection.module.css";
 import API from "./API";
 
 import Container from "../UI/Container";
@@ -30,12 +31,34 @@ const UserQuestions = () => {
   console.log(userQuestions);
 
   return (
-    <Container>
+    <>
+      <article className={heroClasses["user-questions-hero-container"]}>
+      <div className={heroClasses["hero-inner"]}>
+        <div className={heroClasses["category-p"]}>Here's all the questions by</div>
+        <div className={heroClasses["category-h2"]}>{ firstName.replace(/([A-Z]+)/g, ' $1').trim() } </div>
+
+        <div className={classes["tags-section"]}>
+        <Link to={`/qna/questions/${firstName}`}>
+        <div className={classes["trend-category"]}>
+          Asked {userQuestions.length} <div> &nbsp;questions </div>
+          &nbsp;so far
+        </div>
+        </Link>
+        {/* <Link to={`/qna/${categoryId.split(" ").join("")}`}>
+        <div className={classes["trend-category"]}>
+          { categoryId.replace(/([A-Z]+)/g, ' $1').trim() }
+        </div>  
+        </Link>           */}
+        </div>
+      </div>
+      </article>
+
       { loading ? <div className={classes.loading}>Loading . . .</div> : (
         userQuestions.map((qn) => {
           return (
           <Link to={`/qna/${qn.category.split(" ").join("")}/${qn.id}`} key={qn.id}>
           <div className={classes.container}>
+          <div className={classes["main-container"]}>
             <div key={qn.id} className={classes["name-section"]}>
               <p className={classes.name}>
                 {qn.firstName} {qn.lastName}
@@ -56,14 +79,13 @@ const UserQuestions = () => {
             <div className={classes.question}>
               {qn.question}
             </div>
-              </div>
+          </div>
+          </div>
           </Link>
           
         )}).slice().sort((a, b) => b.updatedAt > a.updatedAt ? 1 : -1)
       )}
-
-
-    </Container>
+    </>
   );
 };
 

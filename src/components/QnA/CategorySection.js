@@ -83,7 +83,7 @@ const CategorySection = ({ questions, setQuestions, totalQuestions }) => {
 
   return (
     <>
-    <h2 className={classes["header-section"]}>Question categories</h2>
+    <h2 className={classes["header-section"]}>Question Categories</h2>
     <div className={classes["topics-container"]}>
     { !!results && (
       <div className={classes["topics-section"]}>
@@ -116,7 +116,7 @@ const CategorySection = ({ questions, setQuestions, totalQuestions }) => {
 
     { !!topUsers && (
       <>
-      <h2 className={classes["header-section"]}>Browse by users</h2>
+      <h2 className={classes["header-section"]}>Most Active Users</h2>
       <div className={classes["topics-section"]}>
         { topUsers.map((el, id) => {
           return (
@@ -125,6 +125,11 @@ const CategorySection = ({ questions, setQuestions, totalQuestions }) => {
               <div className={classes["card-body"]}>
                   <div className={classes["card-user"]}>
                     {el.firstName}
+                    { id === 0 && 
+                    <div className={classes["leading"]}>
+                      Popular
+                    </div>
+                    }
                     <div className={classes["trend-category"]}>
                       Rank: {id + 1}
                     </div>

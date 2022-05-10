@@ -37,6 +37,7 @@ const SpecificQuestion = () => {
   // using useRef hook
   const editQn = useRef(null);
   const ansQn = useRef(null);
+  const delQn = useRef(null);
 
   // get functions with useForm() hook
   const { register, handleSubmit, reset } = useForm();
@@ -176,6 +177,20 @@ const SpecificQuestion = () => {
     setShowModal(true);
   };
 
+  const handleDelete = async (e) => {
+    try {
+      const res = await API.delete(`/questions/${specificQuestion.id}`)
+      if ( res ) {
+        console.log(`You have deleted answer ${specificQuestion.id}.`)
+      } else {
+        throw new Error("Oops, something went wrong. Please try again.")
+      }
+      return;
+    } catch (err) {
+      console.log("DELETE error", err.message);
+    }
+  }
+
   return (
     <>
     <article className={heroClasses["specific-hero-container"]}>
@@ -236,6 +251,7 @@ const SpecificQuestion = () => {
       <div className={classes["edit-reply"]}>
         <div className={classes["edit-btn"]} onClick={() => slideToggle(editQn.current)}>Edit</div>
         <div className={classes["reply-btn"]} onClick={() => slideToggle(ansQn.current)}>Reply </div>
+        { auth.firstName === specificQuestion.firstName ? <div className={classes["reply-btn"]} onClick={() => slideToggle(delQn.current)}>Delete </div> : null }
         <div className={classes["reply-counter"]}>
           { (specificAnswers.length > 0) && <div>{specificAnswers.length} answers</div> }
         </div>
@@ -285,6 +301,19 @@ const SpecificQuestion = () => {
       ) 
     }
 
+    { delQn && auth.firstName === specificQuestion.firstName ? 
+      <div ref={delQn} className={classes["edit-qn-container"]}>
+      <div className={classes["edit-reply"]}>Are you sure you want to delete this question?</div>
+      <div className={classes["edit-reply"]}>
+        <Link to={`/qna/${categoryId.split(" ").join("")}`}>
+        <div className={classes["edit-btn"]} onClick={handleDelete}>Yes</div>
+        </Link>
+        <div className={classes["edit-btn"]} onClick={() => slideToggle(delQn.current)}>No</div>
+      </div>
+      </div>
+      : null            
+    }
+
     { ( specificAnswers.length > 0 ) ? 
       specificAnswers.map((ans, i) => {
         return (
@@ -321,7 +350,6 @@ const SpecificQuestion = () => {
             <div className={classes["edit-reply"]}>
               <div className={classes["edit-btn"]} onClick={() => [toggleEditAns(i), setShowEditAns(!showEditAns)]}>Edit</div>
               <div className={classes["reply-btn"]} onClick={() => [toggleReplyAns(i), setShowReplyAns(!showReplyAns)]}>Reply </div>
-              
             </div>
             </div>
           </div>
@@ -354,6 +382,7 @@ const SpecificQuestion = () => {
               </div>
             ) : null
           }
+
           </div>
         )
       }).slice().sort((a, b) => a.updatedAt > b.updatedAt ? 1 : -1 )

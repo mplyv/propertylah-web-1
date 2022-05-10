@@ -16,13 +16,26 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: linear-gradient(#0003, #0003), url("../../assets/images/qna/qna-hero-6.jpg");
+  background: linear-gradient(#0003, #0003), url("../../assets/images/qna/qna-topic-hero.jpg");
   background-position: right;
   background-size: cover;
   background-repeat: no-repeat;
 }
 
 .specific-hero-container {
+  width: 100vw;
+  height: 40vh;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(#0005, #0005), url("../../assets/images/qna/askguru-question-banner-2.jpg");
+  background-position: right;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.user-questions-hero-container {
   width: 100vw;
   height: 40vh;
   display: flex;
@@ -128,8 +141,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: linear-gradient(#0003, #0003), url("../../assets/images/qna/qna-hero-6-tablet.jpg");
-    background-position: top;
+    background: linear-gradient(#0006, #0006), url("../../assets/images/qna/qna-topic-hero.jpg");
+    background-position: right;
     background-size: cover;
     background-repeat: no-repeat;
   }
@@ -168,8 +181,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: linear-gradient(#0003, #0003), url("../../assets/images/qna/qna-hero-6-mobile.jpg");
-    background-position: top;
+    background: linear-gradient(#0008, #0008), url("../../assets/images/qna/qna-topic-hero.jpg");
+    background-position: right;
     background-size: cover;
     background-repeat: no-repeat;
   }

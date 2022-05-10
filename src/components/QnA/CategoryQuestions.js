@@ -8,6 +8,7 @@ import heroClasses from "./HeroSection.module.css";
 import sidebarImage1 from "../../assets/images/qna/askguru-question-banner.jpg";
 import sidebarImage2 from "../../assets/images/qna/askguru-banner.jpg";
 import sidebarImage3 from "../../assets/images/qna/askguru-side-banner.jpg";
+import sidebarImage4 from "../../assets/images/qna/qna-banner-2.jpg";
 
 import API from "./API";
 
@@ -59,6 +60,7 @@ const CategoryQuestions = (props) => {
     <div className={classes.container}>
     <div className={classes["main-container"]}>
       <SearchBar placeholder='Search a Question'/>
+
       { loading ? <div className={classes.loading}>Loading . . .</div> : (
         
         categoryQuestions.map((qn, i) => {
@@ -67,6 +69,10 @@ const CategoryQuestions = (props) => {
           <Link to={`/qna/${categoryId}/${qn.id}`} key={qn.id}>
           <div className={classes["card-container"]}>
             <div key={qn.id} className={classes["name-section"]}>
+              <Avatar className={classes.name}
+                sx={{ width: 30, height: 30 }}
+                src={`http://68.183.183.118:4088/img/users/${auth.photo}`}
+              />
               <p className={classes.name}>
                 {qn.firstName} {qn.lastName}
               </p>
@@ -96,15 +102,24 @@ const CategoryQuestions = (props) => {
     </div>
     <div className={classes.sidebar}>
       {/* <div className={classes.sidebarContainer}> */}
+        <Link to={`/qna`}>
+        <img className={classes["sidebar-image"]} src={sidebarImage4} alt="askguru-side-banner" />
+        </Link>
+        <Link to={`/articles`}>
         <img className={classes["sidebar-image"]} src={sidebarImage1} alt="askguru-question-banner" />
+        </Link>
         <img className={classes["sidebar-image"]} src={sidebarImage2} alt="askguru-question-banner" />
+        <article className={classes.article}>
+        <Link to={`/properties`}>
         <img className={classes["sidebar-image"]} src={sidebarImage3} alt="askguru-side-banner" />
+        <p className={classes["sidebar-image-text"]}>View properties now</p>
+        </Link>
+        </article>
       </div>
     {/* </div> */}
     </div>
     </>
   )
-  
 }
 
 export default CategoryQuestions;
