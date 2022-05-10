@@ -29,13 +29,13 @@
 }
 
 .article {
-/* height: 100%; */
-    position: relative;
-    overflow: hidden;
+  /* height: 100%; */
+  position: relative;
+  overflow: hidden;
 }
 
 .sidebar-image {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   border-radius: 10px;
   object-fit: cover;
   width: 100%;
@@ -94,6 +94,7 @@
   color: #333;
   font-size: 15px;
   font-weight: 700;
+  margin: 0 10px;
 }
 
 .category {
