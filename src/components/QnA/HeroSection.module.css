@@ -22,6 +22,19 @@
   background-repeat: no-repeat;
 }
 
+.specific-hero-container {
+  width: 100vw;
+  height: 40vh;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(#0005, #0005), url("../../assets/images/qna/qna-hero-3.jpg");
+  background-position: right;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .hero-inner {
   padding: 0 12rem;
 }
@@ -39,6 +52,14 @@
   text-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
 }
 
+.category-h2 {
+  font-size: 40px;
+  font-weight: 700;
+  color: #fff;
+  text-align: left;
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+}
+
 .hero-inner > p {
   color: #333;
   font-size: 24px;
@@ -50,7 +71,7 @@
   color: #fff;
   font-size: 24px;
   text-align: left;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .counter {

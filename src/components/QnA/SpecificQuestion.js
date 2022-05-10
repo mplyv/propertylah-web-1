@@ -3,11 +3,15 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import classes from "./SpecificQuestions.module.css";
+import heroClasses from "./HeroSection.module.css";
+import { Avatar } from "@mui/material";
 import API from "./API";
 
 import Container from "../UI/Container";
 import QuestionForm from "./QuestionForm";
+import UserQuestions from "./UserQuestions";
 import AnsModal from "./AnsModal";
+import Vote from "../UI/Vote";
 import { slideToggle } from "../UI/SlideToggle";
 import { timeSince } from "../UI/TimeSince";
 
@@ -27,9 +31,19 @@ const SpecificQuestion = () => {
   const [ showModal, setShowModal ] = useState(false);
   const [ type, setType ] = useState(true);
 
+  const [ user, setUser ] = useState("");
+  const [ userQuestions, setUserQuestions ] = useState([]);
+
   // using useRef hook
   const editQn = useRef(null);
   const ansQn = useRef(null);
+
+  // get functions with useForm() hook
+  const { register, handleSubmit, reset } = useForm();
+
+  const { categoryId, id } = useParams();
+  const auth = useSelector((state) => state.auth);
+
 
   // toggle edit btn in specific ans
   const toggleEditAns = (i) => {
@@ -43,11 +57,17 @@ const SpecificQuestion = () => {
     setShowReplyAns(!showReplyAns);
   }
 
-  // get functions with useForm() hook
-  const { register, handleSubmit, reset } = useForm();
+  // get number of questions this user has asked
+  useEffect(() => {
+    async function getUserQuestions() {
+      setUser(specificQuestion.firstName);
+      const res = await API.get(`/questions/?firstName[eq]=${user}`)
+      const arr = res.data.data;
+      setUserQuestions(arr);
+    }
+    getUserQuestions();
+  }, [specificQuestion]);
 
-  const { categoryId, id } = useParams();
-  const auth = useSelector((state) => state.auth);
 
   // useEffect (() => {
   //   const getSpecificQuestion = async () => {
@@ -157,8 +177,30 @@ const SpecificQuestion = () => {
   };
 
   return (
-    <Container>
+    <>
+    <article className={heroClasses["specific-hero-container"]}>
+      <div className={heroClasses["hero-inner"]}>
+        <div className={heroClasses["category-p"]}>Here's </div>
+        <div className={heroClasses["category-h2"]}>{ specificQuestion.firstName} {specificQuestion.lastName}'s question</div>
+
+        <div className={classes["tags-section"]}>
+        <Link to={`/qna/questions/${specificQuestion.firstName}`}>
+        <div className={classes["trend-category"]}>
+          Asked {userQuestions.length} <div> &nbsp;questions </div>
+          &nbsp;so far
+        </div>
+        </Link>
+        <Link to={`/qna/${categoryId.split(" ").join("")}`}>
+        <div className={classes["trend-category"]}>
+          { categoryId.replace(/([A-Z]+)/g, ' $1').trim() }
+        </div>  
+        </Link>          
+        </div>
+      </div>
+    </article>
+
     <div className={classes.container}>
+    <div className={classes["main-container"]}>
       <div className={classes["tags-section"]}>
         <Link to={`/qna/${categoryId}`}>
         <div className={classes.category}>
@@ -248,6 +290,8 @@ const SpecificQuestion = () => {
         return (
           <div key={i}>
           <div className={classes["ans-container"]}>
+            <Vote />
+            <div className={classes["content-container"]}>
             <div className={classes["tags-section"]}>
               <Link to={`/qna/${categoryId}`}>
               <div className={classes.category}>
@@ -277,11 +321,13 @@ const SpecificQuestion = () => {
             <div className={classes["edit-reply"]}>
               <div className={classes["edit-btn"]} onClick={() => [toggleEditAns(i), setShowEditAns(!showEditAns)]}>Edit</div>
               <div className={classes["reply-btn"]} onClick={() => [toggleReplyAns(i), setShowReplyAns(!showReplyAns)]}>Reply </div>
+              
+            </div>
             </div>
           </div>
 
           { selected === i && showEditAns ? 
-            <div className={classes["ans-container"]}>
+            <div className={classes["content-container"]}>
             <div className={classes["edit-reply"]}>
               <div className={classes["edit-btn"]} onClick={() => setShowEditAns(!showEditAns)}>Close</div>
             </div>
@@ -293,14 +339,14 @@ const SpecificQuestion = () => {
           
           { selected === i && showReplyAns ?
             ( auth.isAuthenticated ? 
-              <div className={classes["ans-container"]}>
+              <div className={classes["content-container"]}>
               <div className={classes["edit-reply"]}>
                 <div className={classes["edit-btn"]} onClick={() => setShowReplyAns(!showReplyAns)}>Close</div>
               </div>
               <AnswerForm title={`Replying to ${ans.firstName}'s answer`} key={id} specificAnswers={specificAnswers} getSpecificAnswers={getSpecificAnswers} />
               </div> 
               : 
-              <div className={classes["ans-container"]}>
+              <div className={classes["content-container"]}>
               <div className={classes["edit-reply"]}>
                 <div className={classes["edit-btn"]} onClick={() => setShowReplyAns(!showReplyAns)}>Close</div>
               </div>
@@ -322,7 +368,8 @@ const SpecificQuestion = () => {
         </>
       )
     }
-    </Container>
+    </div>
+    </>
   );
 };
 
