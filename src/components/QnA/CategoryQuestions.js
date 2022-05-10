@@ -7,6 +7,8 @@ import classes from "./CategoryQuestions.module.css";
 import heroClasses from "./HeroSection.module.css";
 import sidebarImage1 from "../../assets/images/qna/askguru-question-banner.jpg";
 import sidebarImage2 from "../../assets/images/qna/askguru-banner.jpg";
+import sidebarImage3 from "../../assets/images/qna/askguru-side-banner.jpg";
+
 import API from "./API";
 
 import SearchBar from "./SearchBar/SearchBar";
@@ -96,6 +98,7 @@ const CategoryQuestions = (props) => {
       {/* <div className={classes.sidebarContainer}> */}
         <img className={classes["sidebar-image"]} src={sidebarImage1} alt="askguru-question-banner" />
         <img className={classes["sidebar-image"]} src={sidebarImage2} alt="askguru-question-banner" />
+        <img className={classes["sidebar-image"]} src={sidebarImage3} alt="askguru-side-banner" />
       </div>
     {/* </div> */}
     </div>
