@@ -98,13 +98,17 @@ const CategoryQuestions = (props) => {
       {/* <div className={classes.sidebarContainer}> */}
         <img className={classes["sidebar-image"]} src={sidebarImage1} alt="askguru-question-banner" />
         <img className={classes["sidebar-image"]} src={sidebarImage2} alt="askguru-question-banner" />
+        <article className={classes.article}>
+        <Link to={`/properties`}>
         <img className={classes["sidebar-image"]} src={sidebarImage3} alt="askguru-side-banner" />
+        <p className={classes["sidebar-image-text"]}>View properties now</p>
+        </Link>
+        </article>
       </div>
     {/* </div> */}
     </div>
     </>
   )
-  
 }
 
 export default CategoryQuestions;

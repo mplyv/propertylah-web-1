@@ -14,7 +14,7 @@ const Modal = ({ setShowModal, props }) => {
 
   return (
     ReactDOM.createPortal(
-      <div className="container" ref={modalRef} onClick={closeModal}>
+      <div data-testid="modal" className="container" ref={modalRef} onClick={closeModal}>
         <div className="modal">
           <button className="close-btn" aria-label="Close Modal" aria-labelledby="close-modal" onClick={() => setShowModal(false)}>
             <svg className="svg-icon" viewBox="0 0 20 20">
