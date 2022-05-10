@@ -14,9 +14,9 @@ import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import BookmarksOutlinedIcon from "@mui/icons-material/BookmarksOutlined";
 
 import { clearAuth } from "../../store/auth-thunks";
+import { favoritesActions } from "../../store/favorites-slice";
 
 const AccountMenu = () => {
   const auth = useSelector((state) => state.auth);
@@ -33,6 +33,7 @@ const AccountMenu = () => {
 
   const logoutHandler = () => {
     dispatch(clearAuth());
+    dispatch(favoritesActions.clearFavorites());
     navigate("/login");
   };
   return (
@@ -120,12 +121,6 @@ const AccountMenu = () => {
           Favorite Properties
         </MenuItem>
 
-        <MenuItem>
-          <ListItemIcon>
-            <BookmarksOutlinedIcon sx={{ width: 25, height: 25 }} />
-          </ListItemIcon>
-          Bookmarked Questions
-        </MenuItem>
         <MenuItem
           onClick={() => {
             navigate("/credits");
@@ -141,6 +136,16 @@ const AccountMenu = () => {
             <Settings sx={{ width: 25, height: 25 }} />
           </ListItemIcon>
           Settings
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            navigate("/admin");
+          }}
+        >
+          <ListItemIcon>
+            <Settings sx={{ width: 25, height: 25 }} />
+          </ListItemIcon>
+          Admin
         </MenuItem>
         <Divider />
         <MenuItem onClick={logoutHandler}>

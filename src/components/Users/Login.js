@@ -42,8 +42,11 @@ const Login = () => {
     try {
       const user = await login(formInputs);
       if (!user.error) {
-        dispatch(saveAuth(user.data.data));
-        dispatch(fetchFavorites());
+        console.log("[Login.js] saving user data to state...");
+        dispatch(saveAuth(user.data.data)).then(() => {
+          console.log("[Login.js] fetching favorites...");
+          dispatch(fetchFavorites());
+        });
       }
     } catch (error) {
       // api call error - error connecting - pls check your network or try again later.

@@ -56,7 +56,12 @@ export const fetchFavorites = () => {
   return async (dispatch, getState) => {
     const state = getState();
 
-    if (!state.auth.isAuthenticated) return;
+    if (!state.auth.isAuthenticated) {
+      console.log("not yet auth, can't fetch favorites");
+      return;
+    }
+
+    console.log("Loading favorites...");
 
     try {
       const res = await fetch(`http://68.183.183.118:4088/api/v1/users/me`, {

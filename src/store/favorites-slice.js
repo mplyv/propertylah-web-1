@@ -20,6 +20,9 @@ const favoritesSlice = createSlice({
     saveFavorites(state, { payload }) {
       state.favIds = [...payload];
     },
+    clearFavorites(state) {
+      state.favIds = [];
+    },
   },
 });
 

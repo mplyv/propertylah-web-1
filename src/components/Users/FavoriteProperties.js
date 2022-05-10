@@ -12,22 +12,23 @@ import CardActions from "@mui/material/CardActions";
 import CircularProgress from "@mui/material/CircularProgress";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+// import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
-
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+// import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 
 import {
   addToFavorites,
   removeFromFavorites,
 } from "../../store/favorites-thunks";
+
 const FavoriteProperties = () => {
   const [propertiesData, setPropertiesData] = useState([]);
   const favIds = useSelector((state) => state.favorites.favIds);
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
+
   const toggleFavHandler = (id) => {
     if (!favIds.includes(id)) dispatch(addToFavorites(id));
     else dispatch(removeFromFavorites(id));
@@ -81,7 +82,7 @@ const FavoriteProperties = () => {
                 <IconButton onClick={toggleFavHandler.bind(this, property.id)}>
                   <FavoriteOutlinedIcon color="primary" />
                 </IconButton>
-                <IconButton aria-label="share">
+                <IconButton>
                   <ShareIcon />
                 </IconButton>
               </CardActions>
