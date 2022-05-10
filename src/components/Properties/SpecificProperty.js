@@ -59,7 +59,10 @@ const SpecificProperty = ()=>{
                         </div>
                         <img className={styles.image} src='/assets/property-images/Sky-Vue-Ang-Mo-Kio-Bishan-Thomson-Singapore-1.jpg' alt='image1' />
                         <div>
-                            {propertyData.saleType==='Rent'? <p className={styles.price}>S$ {propertyData.price.toLocaleString()} /mo</p>: <p className={styles.price}>S$ {propertyData.price.toLocaleString()}</p>}
+                            <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+                                {propertyData.saleType==='Rent'? <p className={styles.price}>S$ {propertyData.price.toLocaleString()} /mo</p>: <p className={styles.price}>S$ {propertyData.price.toLocaleString()}</p>}
+                                <button className={styles.favoriteButton}>favorite</button>
+                            </div>
                             <div className={styles.horizontalContainerSpecificProperty}>
                                 <p>{propertyData.noOfBedrooms} <img className={styles.icon} src='/assets/icons/bed-icon.png' alt='bedIcon'></img></p>
                                 <p>{propertyData.noOfBaths} <img className={styles.icon} src='/assets/icons/bath-icon.png' alt='bathIcon'></img></p>

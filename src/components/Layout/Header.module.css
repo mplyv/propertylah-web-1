@@ -1,7 +1,7 @@
 .header {
   border-top: 2px solid var(--pri-color);
   /* background-color: var(--pri-light); */
-  padding: 0px 30px;
+  padding: 5px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
