@@ -11,6 +11,7 @@ import PopupComponent from "./components/PopupComponent";
 import ImageViewer from "./components/ImageViewer";
 import Modal from "../QnA/Modal";
 import { useSelector } from "react-redux";
+import FavoriteProperties from "../Users/FavoriteProperties";
 
 
 const PropertyList = (props)=>{
@@ -157,7 +158,10 @@ const PropertyList = (props)=>{
                       ]}/>
                     </div>
                     <div className={styles.propertyCard}>
-                      <p className={styles.fontLargeBold}>{propertyData.propertyName}</p>
+                      <div className={styles.horizontalContainer} style={{justifyContent: 'space-between'}}>
+                        <p className={styles.fontLargeBold}>{propertyData.propertyName}</p>
+                        <button className={styles.favoriteButton}>favorite</button>
+                      </div>
                       <p className={styles.fontSmall}>{propertyData.address}, {propertyData.postcode}, Singapore</p>
                       <div className={styles.horizontalContainer}>
                         {propertyData.saleType==='Rent'? <p>S$ {propertyData.price.toLocaleString()} /mo</p>: <p>S$ {propertyData.price.toLocaleString()}</p>}
