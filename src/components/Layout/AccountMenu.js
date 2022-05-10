@@ -14,9 +14,9 @@ import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import BookmarksOutlinedIcon from "@mui/icons-material/BookmarksOutlined";
 
 import { clearAuth } from "../../store/auth-thunks";
+import { favoritesActions } from "../../store/favorites-slice";
 
 const AccountMenu = () => {
   const auth = useSelector((state) => state.auth);
@@ -33,6 +33,7 @@ const AccountMenu = () => {
 
   const logoutHandler = () => {
     dispatch(clearAuth());
+    dispatch(favoritesActions.clearFavorites());
     navigate("/login");
   };
   return (
@@ -49,7 +50,7 @@ const AccountMenu = () => {
           >
             {/* <Avatar sx={{ width: 32, height: 32 }}>M</Avatar> */}
             <Avatar
-              sx={{ width: 50, height: 50 }}
+              sx={{ width: 40, height: 40 }}
               alt={auth.firstName}
               src={`http://68.183.183.118:4088/img/users/${auth.photo}`}
             />
@@ -120,23 +121,31 @@ const AccountMenu = () => {
           Favorite Properties
         </MenuItem>
 
-        <MenuItem>
-          <ListItemIcon>
-            <BookmarksOutlinedIcon sx={{ width: 25, height: 25 }} />
-          </ListItemIcon>
-          Bookmarked Questions
-        </MenuItem>
-        <MenuItem>
+        <MenuItem
+          onClick={() => {
+            navigate("/credits");
+          }}
+        >
           <ListItemIcon>
             <MonetizationOnOutlinedIcon sx={{ width: 25, height: 25 }} />
           </ListItemIcon>
-          Purchase Credits
+          Credits
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
             <Settings sx={{ width: 25, height: 25 }} />
           </ListItemIcon>
           Settings
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            navigate("/admin");
+          }}
+        >
+          <ListItemIcon>
+            <Settings sx={{ width: 25, height: 25 }} />
+          </ListItemIcon>
+          Admin
         </MenuItem>
         <Divider />
         <MenuItem onClick={logoutHandler}>

@@ -20,7 +20,7 @@ import {
   useLazyGetMeQuery,
   useUpdateMeMutation,
 } from "../../services/user-service";
-
+import { fetchFavorites } from "../../store/favorites-thunks";
 import Container from "../UI/Container";
 
 const defaultInputs = {
@@ -85,8 +85,9 @@ const Profile = () => {
 
   useEffect(() => {
     console.log("[Profile.js] loading your data...");
+    dispatch(fetchFavorites());
     updateStateData();
-  }, [updateStateData]);
+  }, [updateStateData, dispatch]);
 
   const inputChangeHandler = (e) => {
     setFormInputs((prevInputs) => {
